@@ -1,0 +1,67 @@
+{
+  "name": "touch-type",
+  "version": "1.0.0",
+  "description": "touch-type",
+  "module": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot --mode development --config ./webpack.config.js",
+    "build": "webpack --mode production --config ./webpack.config.js"
+  },
+  "sideEffects": [
+    "./src/**/*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmullo/touch-type.git"
+  },
+  "keywords": [
+    "touch",
+    "type",
+    "typing",
+    "practice",
+    "tool",
+    "test",
+    "finnish",
+    "suomi",
+    "suomeksi"
+  ],
+  "author": "Jussi Mullo <mulloju@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jmullo/touch-type/issues"
+  },
+  "homepage": "https://github.com/jmullo/touch-type",
+  "devDependencies": {
+    "@babel/core": "7.12.3",
+    "@babel/plugin-proposal-class-properties": "7.12.1",
+    "@babel/plugin-transform-classes": "7.12.1",
+    "@babel/plugin-transform-runtime": "7.12.1",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-react": "7.12.1",
+    "babel-loader": "8.1.0",
+    "babel-plugin-lodash": "3.3.4",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.24",
+    "clean-webpack-plugin": "3.0.0",
+    "copy-webpack-plugin": "6.1.0",
+    "css-loader": "4.3.0",
+    "file-loader": "6.1.0",
+    "html-webpack-plugin": "4.4.1",
+    "postcss-loader": "4.0.2",
+    "postcss-preset-env": "6.7.0",
+    "style-loader": "1.2.1",
+    "url-loader": "4.1.0",
+    "webpack": "4.44.1",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "axios": "0.21.0",
+    "core-js": "3.6.5",
+    "fontsource-roboto-mono": "3.0.3",
+    "lodash": "4.17.20",
+    "luxon": "1.25.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "regenerator-runtime": "0.13.7"
+  }
+}

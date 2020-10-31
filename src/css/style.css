@@ -1,0 +1,82 @@
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    animation: fade 0.5s ease-in;
+}
+
+#main {
+    height: 100%;
+    background-color: rgb(220, 220, 220);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.input {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    display: block;
+}
+
+.textArea {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(100, 100, 100);
+    border-radius: 20px;
+    padding: 20px;
+    width: 600px;
+    font-size: 32px;
+    user-select: none;
+}
+
+.word {
+    float: left;
+}
+
+.char {
+    float: left;
+}
+
+.space {
+    color: rgba(0, 0, 0, 0);
+    float: left;
+}
+
+.cursor {
+    background-color: rgb(220, 220, 220);
+}
+
+.correct {
+    color: #2196f3;
+}
+
+.error {
+    color: rgb(255, 0, 0);
+}
+
+.infoDialog {
+    margin: 20px;
+    user-select: none;
+}
+
+.buttons {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    z-index: 1000;
+}
+
+.dialog .infoButton {
+    margin-top: 4px;
+}
