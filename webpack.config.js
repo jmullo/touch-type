@@ -99,7 +99,7 @@ module.exports = (env, argv) => {
             rules: [
                 {
                     test: /\.js$/,
-                    use: ['babel-loader?compact=true']
+                    use: ['babel-loader']
                 },
                 {
                     test: /\.css$/,
@@ -129,7 +129,7 @@ module.exports = (env, argv) => {
             }),
             new CopyPlugin({
                 patterns: [
-                    { from: './src/data/foo.txt' }
+                    { from: './src/data/sanalista.txt' }
                 ]
             }),
         ]

@@ -1,20 +1,24 @@
-import { useState, useCallback } from 'react';
+import { useContext, useState, useCallback } from 'react';
 
+import { DataContext } from 'components/DataContext';
 import { Word } from 'components/Word';
 import { Space } from 'components/Space';
+import { STATE } from 'constants/config';
+import { addError } from 'util/results';
 
-export const TextArea = ({text}) => {
+export const TextArea = () => {
 
-    const [typedText, setTypedText] = useState([]);
-    const [cursorIndex, setCursorIndex] = useState(0);
+    const { state, testWords, results, setState, setResults } = useContext(DataContext);
+    const [ typedText, setTypedText ] = useState([]);
+    const [ cursorIndex, setCursorIndex ] = useState(0);
 
     let typedWord;
     let typedChar;
     let charIndex = 0;
 
-    const words = text.split(' ');
+    const testText = testWords.join(' ');
 
-    const elements = words.reduce((array, word, index) => { 
+    const elements = testWords.reduce((array, word, index) => { 
         typedWord = typedText.slice(charIndex, charIndex + word.length).join('');
 
         array.push(
@@ -29,7 +33,7 @@ export const TextArea = ({text}) => {
         charIndex += word.length;
         typedChar = typedText.slice(charIndex, charIndex + 1).join('');
 
-        if (index < words.length - 1) {
+        if (index < testWords.length - 1) {
             array.push(
                 <Space
                     typedChar={typedChar}
@@ -49,12 +53,18 @@ export const TextArea = ({text}) => {
             element.onblur = () => {
                 setTypedText([]);
                 setCursorIndex(0);
+                setState(STATE.RESET);
                 element.focus();
             }
         }
     }, []);
 
     const handleInput = (event) => {
+        if (state === STATE.END) {
+            event.preventDefault();
+            return;
+        }
+
         if (event.nativeEvent.inputType === 'deleteContentBackward') {
             typedText.pop();
             setTypedText(typedText);
@@ -63,16 +73,33 @@ export const TextArea = ({text}) => {
     };
 
     const handleKeypress = (event) => {
-        if (cursorIndex < text.length) {
-            if (event.key === 'Enter') {
-                event.target.value = event.target.value + ' ';
-                typedText.push(' ');
-            } else {
-                typedText.push(event.key);
-            }
-    
-            setTypedText(typedText);
-            setCursorIndex(cursorIndex + 1);
+        if (state === STATE.END) {
+            event.preventDefault();
+            return;
+        }
+        
+        if (state !== STATE.TESTING) {
+            setState(STATE.TESTING);
+        }
+
+        if (event.key === 'Enter') {
+            typedChar = ' ';
+            event.target.value = event.target.value + typedChar;
+        } else {
+            typedChar = event.key;
+        }
+
+        typedText.push(typedChar);
+
+        if (typedChar !== testText[cursorIndex]) {
+            setResults(addError({ results, key: testText[cursorIndex] }));
+        }
+
+        setTypedText(typedText);
+        setCursorIndex(cursorIndex + 1);
+
+        if (cursorIndex + 1 === testText.length) {
+            setState(STATE.END);
         }
     };
 
@@ -83,6 +110,7 @@ export const TextArea = ({text}) => {
                 id="text"
                 className="input"
                 tabIndex="0"
+                autoComplete="off"
                 ref={inputRef}
                 onChange={handleInput}
                 onKeyPress={handleKeypress} />

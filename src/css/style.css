@@ -18,6 +18,34 @@ html, body {
     align-items: center;
     justify-content: center;
     font-family: 'Roboto Mono', monospace;
+    user-select: none;
+}
+
+.app {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.options {
+    display: none;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(140, 140, 140);
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+    width: 900px;
+    height: 80px;
+}
+
+.textArea {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(100, 100, 100);
+    border-radius: 20px;
+    padding: 20px;
+    width: 900px;
+    font-size: 30px;
 }
 
 .input {
@@ -29,14 +57,27 @@ html, body {
     display: block;
 }
 
-.textArea {
+.results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     background-color: rgb(255, 255, 255);
     border: 2px solid rgb(100, 100, 100);
     border-radius: 20px;
-    padding: 20px;
-    width: 600px;
-    font-size: 32px;
-    user-select: none;
+    padding: 10px;
+    margin-top: 10px;
+    width: 490px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.resultValue {
+    margin: 0 10px 0 10px;
+}
+
+.number {
+    font-size: 30px;
 }
 
 .word {
@@ -44,6 +85,7 @@ html, body {
 }
 
 .char {
+    color: rgb(60, 60, 60);
     float: left;
 }
 
@@ -57,7 +99,7 @@ html, body {
 }
 
 .correct {
-    color: #2196f3;
+    color: rgb(33, 150, 243);
 }
 
 .error {
@@ -79,4 +121,8 @@ html, body {
 
 .dialog .infoButton {
     margin-top: 4px;
+}
+
+.hidden {
+    visibility: hidden;
 }

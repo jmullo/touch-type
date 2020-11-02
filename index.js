@@ -1,6 +1,10 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import touchType from 'touch-type';
+import { render } from 'react-dom';
+import { App } from 'components/App';
 
-export default touchType;
+import 'fontsource-roboto-mono/400-normal.css'
+import 'style.css';
+
+export default render(<App />, document.getElementById('main'));

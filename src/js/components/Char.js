@@ -1,4 +1,4 @@
-export const Char = ({char, typedChar, charIndex, cursorIndex}) => {
+export const Char = ({ char, typedChar, charIndex, cursorIndex }) => {
 
     let className = 'char';
 

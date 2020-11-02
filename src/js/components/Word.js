@@ -1,6 +1,6 @@
 import { Char } from 'components/Char';
 
-export const Word = ({word, typedWord, charIndex, cursorIndex}) => {
+export const Word = ({ word, typedWord, charIndex, cursorIndex }) => {
 
     return (
         <div className="word">

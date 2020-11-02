@@ -1,6 +1,6 @@
 import { Char } from 'components/Char';
 
-export const Space = ({typedChar, charIndex, cursorIndex}) => {
+export const Space = ({ typedChar, charIndex, cursorIndex }) => {
 
     return (
         <div className="space">
