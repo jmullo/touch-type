@@ -13,7 +13,7 @@ html, body {
 
 #main {
     height: 100%;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(170, 170, 170);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,24 +28,52 @@ html, body {
     flex-direction: column;
 }
 
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 800px;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.appName {
+    color: rgb(40, 40, 40);
+    text-shadow: rgb(255, 255, 255) 0px 0px 6px;
+    flex-grow: 1;
+    font-size: 24px;
+}
+
 .options {
-    display: none;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(140, 140, 140);
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    width: 900px;
-    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    flex-grow: 2;
+    font-size: 14px;
+}
+
+.button {
+    color: rgb(40, 40, 40);
+    text-shadow: rgb(255, 255, 255) 0px 0px 4px;
+    margin: 0 4px 0 4px;
+    cursor: pointer;
+}
+
+.enabled {
+    color: rgb(255, 255, 255);
+    text-shadow: rgb(0, 0, 0) 0px 0px 4px;
 }
 
 .textArea {
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(100, 100, 100);
+    border: 1px solid rgb(100, 100, 100);
     border-radius: 20px;
-    padding: 20px;
-    width: 900px;
-    font-size: 30px;
+    padding: 16px;
+    margin: 10px 0 10px 0;
+    width: 800px;
+    font-size: 28px;
 }
 
 .input {
@@ -58,26 +86,25 @@ html, body {
 }
 
 .results {
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(100, 100, 100);
-    border-radius: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    width: 490px;
-    height: 40px;
+    border: 1px solid rgb(100, 100, 100);
+    border-radius: 16px;
+    padding: 4px;
     font-size: 20px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .resultValue {
-    margin: 0 10px 0 10px;
+    margin: 0 8px 0 8px;
 }
 
 .number {
-    font-size: 30px;
+    font-size: 24px;
 }
 
 .word {

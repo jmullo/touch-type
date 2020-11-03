@@ -57,6 +57,7 @@
   "dependencies": {
     "axios": "0.21.0",
     "core-js": "3.6.5",
+    "fontsource-roboto": "3.0.3",
     "fontsource-roboto-mono": "3.0.3",
     "lodash": "4.17.20",
     "luxon": "1.25.0",

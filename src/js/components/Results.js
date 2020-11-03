@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 
 import { DataContext } from 'components/DataContext';
-import { countErrors } from 'util/results';
+import { countErrors, averageKeyTimes } from 'util/results';
 import { STATE, CHARS_IN_WORD } from 'constants/config';
 
 export const Results = () => {
@@ -13,6 +13,8 @@ export const Results = () => {
 
     const formatResults = () => {
         if (results.wordsPerMinute) {
+            //console.log(averageKeyTimes(results));
+
             return (
                 <>
                     <div className="resultValue">
@@ -33,12 +35,12 @@ export const Results = () => {
             const testTextLength = testWords.join(' ').length;
             const timeMinutes = (performance.now() - startTime) / 60000;
             const wordsPerMinute = Math.floor(testTextLength / CHARS_IN_WORD / timeMinutes);
-            const accuracy = Math.floor((testTextLength - countErrors({ results })) / testTextLength * 100);
+            const accuracy = Math.floor((testTextLength - countErrors(results)) / testTextLength * 100);
 
             setResults({ ...results, wordsPerMinute, accuracy });
             setStartTime(null);
         } else if (state === STATE.RESET) {
-            setResults({ errors: [] });
+            setResults({});
         }
     });
 

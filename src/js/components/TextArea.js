@@ -4,7 +4,9 @@ import { DataContext } from 'components/DataContext';
 import { Word } from 'components/Word';
 import { Space } from 'components/Space';
 import { STATE } from 'constants/config';
-import { addError } from 'util/results';
+import { addError, addKeyTime } from 'util/results';
+
+let lastKeyTime;
 
 export const TextArea = () => {
 
@@ -14,6 +16,7 @@ export const TextArea = () => {
 
     let typedWord;
     let typedChar;
+    let timeNow;
     let charIndex = 0;
 
     const testText = testWords.join(' ');
@@ -75,9 +78,13 @@ export const TextArea = () => {
     const handleKeypress = (event) => {
         if (state === STATE.END) {
             event.preventDefault();
+            lastKeyTime = null;
+
             return;
         }
         
+        timeNow = performance.now();
+
         if (state !== STATE.TESTING) {
             setState(STATE.TESTING);
         }
@@ -93,6 +100,12 @@ export const TextArea = () => {
 
         if (typedChar !== testText[cursorIndex]) {
             setResults(addError({ results, key: testText[cursorIndex] }));
+            lastKeyTime = null;
+        } else if (lastKeyTime) { 
+            setResults(addKeyTime({ results, key: testText[cursorIndex], time: timeNow - lastKeyTime }));
+            lastKeyTime = timeNow;
+        } else {
+            lastKeyTime = timeNow;
         }
 
         setTypedText(typedText);
