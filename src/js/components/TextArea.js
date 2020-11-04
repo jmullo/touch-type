@@ -1,10 +1,10 @@
-import { useContext, useState, useCallback } from 'react';
+import { useContext, useState, useCallback, useEffect } from 'react';
 
 import { DataContext } from 'components/DataContext';
-import { Word } from 'components/Word';
-import { Space } from 'components/Space';
+import { Row } from 'components/Row';
 import { STATE } from 'constants/config';
 import { addError, addKeyTime } from 'util/results';
+import { rowGenerator, getActiveRowIndex } from 'util/words';
 
 let lastKeyTime;
 
@@ -14,53 +14,29 @@ export const TextArea = () => {
     const [ typedText, setTypedText ] = useState([]);
     const [ cursorIndex, setCursorIndex ] = useState(0);
 
-    let typedWord;
     let typedChar;
     let timeNow;
-    let charIndex = 0;
 
     const testText = testWords.join(' ');
-
-    const elements = testWords.reduce((array, word, index) => { 
-        typedWord = typedText.slice(charIndex, charIndex + word.length).join('');
-
-        array.push(
-            <Word
-                word={word}
-                typedWord={typedWord}
-                charIndex={charIndex}
-                cursorIndex={cursorIndex}
-                key={charIndex} />
-        );
-        
-        charIndex += word.length;
-        typedChar = typedText.slice(charIndex, charIndex + 1).join('');
-
-        if (index < testWords.length - 1) {
-            array.push(
-                <Space
-                    typedChar={typedChar}
-                    charIndex={charIndex}
-                    cursorIndex={cursorIndex}
-                    key={charIndex++} />
-            );
-        }
-
-        return array;
-    }, []);
+    const rows = Array.from(rowGenerator(testWords));
 
     const inputRef = useCallback((element) => {
         if (element) {
+            window.getSelection().removeAllRanges();
             element.focus();
             
             element.onblur = () => {
-                setTypedText([]);
-                setCursorIndex(0);
-                setState(STATE.RESET);
-                element.focus();
+                setTimeout(() => element.focus(), 1);
             }
         }
     }, []);
+
+    useEffect(async () => {
+        if (state === STATE.RESET) {
+            setTypedText([]);
+            setCursorIndex(0);
+        }
+    });
 
     const handleInput = (event) => {
         if (state === STATE.END) {
@@ -127,7 +103,18 @@ export const TextArea = () => {
                 ref={inputRef}
                 onChange={handleInput}
                 onKeyPress={handleKeypress} />
-            { elements }
+            {
+                rows.map((row, index) => (
+                    <Row
+                        index={index}
+                        row={row}
+                        typedText={typedText}
+                        activeRowIndex={getActiveRowIndex(rows, cursorIndex)}
+                        lastRowIndex={rows.length - 1}
+                        cursorIndex={cursorIndex}
+                        key={index} />
+                ))
+            }
         </div>
     );
 

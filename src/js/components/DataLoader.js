@@ -9,16 +9,16 @@ let loadedWords;
 
 export const DataLoader = () => {
 
-    const { state, allWords, setState, setAllWords, setTestWords } = useContext(DataContext);
+    const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(DataContext);
 
     useEffect(async () => {
         if (!allWords[0]) {
             loadedWords = await loadWordList();
 
             setAllWords(loadedWords);
-            setTestWords(selectWords({ words: loadedWords }));
+            setTestWords(selectWords({ options, list: loadedWords }));
         } else if (state === STATE.RESET) {
-            setTestWords(selectWords({ words: loadedWords }));
+            setTestWords(selectWords({ options, list: loadedWords }));
             setState(STATE.BEGIN);
         }
     });

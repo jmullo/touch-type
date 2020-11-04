@@ -2,18 +2,16 @@ import { useContext } from 'react';
 
 import { DataContext } from 'components/DataContext';
 import { Button } from 'components/Button';
+import { STATE } from 'constants/config';
 
 export const Header = () => {
 
-    const { options, setOptions } = useContext(DataContext);
+    const { options, setOptions, setState } = useContext(DataContext);
 
-    const handleToggle = (button) => {
-        setOptions({...options,
-            [button]: !options[button]
-        });
-    };
-
-    const handleLanguage = (language) => setOptions({...options, language });
+    const setAndReset = (options) => setOptions(options) || setState(STATE.RESET);
+    const handleLanguage = (language) => language !== options.language && setAndReset({...options, language });
+    const handleWords = (words) => words !== options.words && setAndReset({...options, words });
+    const handleToggle = (button) => setAndReset({...options, [button]: !options[button] });
 
     return (
         <div className="header">
@@ -32,7 +30,23 @@ export const Header = () => {
                     enabled={options.language === "finnish"}
                     onClick={() => handleLanguage("finnish")} />
             </div>
-
+            <div className="options">
+                <Button
+                    className="button"
+                    text="20"
+                    enabled={options.words === "20"}
+                    onClick={() => handleWords("20")} />
+                <Button
+                    className="button"
+                    text="50"
+                    enabled={options.words === "50"}
+                    onClick={() => handleWords("50")} />
+                <Button
+                    className="button"
+                    text="100"
+                    enabled={options.words === "100"}
+                    onClick={() => handleWords("100")} />
+            </div>
             <div className="options">
                 <Button
                     className="button"

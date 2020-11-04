@@ -67,12 +67,14 @@ html, body {
 }
 
 .textArea {
+    position: relative;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(100, 100, 100);
     border-radius: 20px;
     padding: 16px;
     margin: 10px 0 10px 0;
-    width: 800px;
+    width: 796px;
+    height: 174px;
     font-size: 28px;
 }
 
@@ -105,6 +107,19 @@ html, body {
 
 .number {
     font-size: 24px;
+}
+
+.row {
+    position: absolute;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.7s linear 0.7s, opacity 0.7s;
+}
+
+.row.hidden {
+    visibility: visible;
+    opacity: 0;
+    transition: visibility 0.3s linear 0.3s, opacity 0.3s;
 }
 
 .word {
