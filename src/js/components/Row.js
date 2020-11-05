@@ -6,7 +6,7 @@ export const Row = ({ index, row, activeRowIndex, lastRowIndex, typedText, curso
     //console.log(`index: ${index}, active: ${activeRowIndex}, number: ${row.number}, length: ${row.length}`);
 
     const hidden = (/*lastRowIndex - index >= NUMBER_OF_ROWS &&*/ (activeRowIndex - index) > 1) || 
-                   (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 2);
+                   (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
 
     const className = hidden ? "row hidden" : "row";
     const style = { top: `${8 + (row.number * ROW_HEIGHT)}px` };

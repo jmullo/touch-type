@@ -1,6 +1,30 @@
 import { sample, cloneDeep, findIndex, upperFirst } from 'lodash';
 
-import { NUMBER_OF_ROWS, MAX_WORD_LENGTH, ROW_LENGTH_CHARS } from 'constants/config';
+import { NUMBER_OF_ROWS, MAX_WORD_LENGTH, ROW_LENGTH_CHARS, PROPABILITY } from 'constants/config';
+
+const probability = (number) => Math.random() <= number;
+
+const capitalisation = (enabled, words) => {
+    if (enabled) {
+        words.forEach((word, index) => {
+            if (probability(PROPABILITY.CAPITALISED)) {
+                words[index] = upperFirst(word);
+            }
+        });
+    } else {
+        words = words.join(' ').toLowerCase().split(' ');
+    }
+};
+
+const numbers = (enabled, words) => {
+    if (enabled) {
+        words.forEach((word, index) => {
+            if (index > 1 && !!isNaN(words[index - 1]) && probability(PROPABILITY.NUMBER)) {
+                words[index] = `${Math.floor(Math.random() * 999) + 100}`.substr(0, Math.floor(Math.random() * 3) + 1);
+            }
+        });
+    }
+};
 
 export const selectWords = ({ options, list }) => {
     let selectedWords = [];
@@ -14,11 +38,8 @@ export const selectWords = ({ options, list }) => {
         }
     }
 
-    if (options.capitalisation) {
-        selectedWords.forEach((word, index) => selectedWords[index] = upperFirst(word));
-    } else {
-        selectedWords = selectedWords.join(' ').toLowerCase().split(' ');
-    }
+    capitalisation(options.capitalisation, selectedWords);
+    numbers(options.numbers, selectedWords);
 
     return selectedWords;
 };
