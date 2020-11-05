@@ -9,7 +9,7 @@ export const Row = ({ index, row, activeRowIndex, lastRowIndex, typedText, curso
                    (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
 
     const className = hidden ? "row hidden" : "row";
-    const style = { top: `${8 + (row.number * ROW_HEIGHT)}px` };
+    const style = { top: `${10 + (row.number * 4) + (row.number * ROW_HEIGHT)}px` };
 
     let charIndex = row.charIndex;
 
