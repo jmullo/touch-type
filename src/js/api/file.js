@@ -1,5 +1,12 @@
 export const loadWordList = async () => {
-    return fetch('sanalista.txt')
-        .then((response) => response.text())
-        .then((response) => response.split(/\r?\n/));
+    const [english, finnish] = await Promise.all([
+        fetch('words_english.txt')
+            .then((response) => response.text())
+            .then((response) => response.split(/\r?\n/)),
+        fetch('words_finnish.txt')
+            .then((response) => response.text())
+            .then((response) => response.split(/\r?\n/))
+    ]);
+
+    return { finnish, english };
 };

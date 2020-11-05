@@ -12,7 +12,7 @@ export const App = () => {
 
     const [ state, newState ] = useState(STATE.BEGIN);
     const [ options, newOptions ] = useState(OPTIONS_DEFAULT);
-    const [ allWords, newAllWords ] = useState([]);
+    const [ allWords, newAllWords ] = useState({});
     const [ testWords, newTestWords ] = useState([]);
     const [ results, newResults ] = useState({});
 

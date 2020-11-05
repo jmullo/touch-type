@@ -31,7 +31,7 @@ export const selectWords = ({ options, list }) => {
     let word;
     
     while (selectedWords.length < options.words) {
-        word = sample(list);
+        word = sample(list[options.language]);
 
         if (word.length <= MAX_WORD_LENGTH) {
             selectedWords.push(word);

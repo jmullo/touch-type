@@ -12,7 +12,7 @@ export const DataLoader = () => {
     const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(DataContext);
 
     useEffect(async () => {
-        if (!allWords[0]) {
+        if (!allWords.english) {
             loadedWords = await loadWordList();
 
             setAllWords(loadedWords);

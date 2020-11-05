@@ -129,7 +129,8 @@ module.exports = (env, argv) => {
             }),
             new CopyPlugin({
                 patterns: [
-                    { from: './src/data/sanalista.txt' }
+                    { from: './src/data/words_english.txt' },
+                    { from: './src/data/words_finnish.txt' }
                 ]
             }),
         ]
