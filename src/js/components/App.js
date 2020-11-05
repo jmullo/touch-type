@@ -5,6 +5,7 @@ import { DataLoader } from 'components/DataLoader';
 import { Header } from 'components/Header';
 import { TextArea } from 'components/TextArea';
 import { Results } from 'components/Results';
+import { Footer } from 'components/Footer';
 import { OPTIONS_DEFAULT, STATE } from 'constants/config';
 
 export const App = () => {
@@ -34,12 +35,15 @@ export const App = () => {
             setTestWords,
             setResults
          }}>
-            <div className="app">
-                <DataLoader />
-                <Header />
-                <TextArea />
-                <Results />
+            <div className="top">
+                <div className="app">
+                    <DataLoader />
+                    <Header />
+                    <TextArea />
+                    <Results />
+                </div>
             </div>
+            <Footer />
         </DataContext.Provider>
     );
 
