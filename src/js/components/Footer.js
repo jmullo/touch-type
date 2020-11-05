@@ -14,7 +14,7 @@ export const Footer = () => {
                 <FontAwesomeIcon className="icon" icon={faGithub} /><a href="https://github.com/jmullo/touch-type">GitHub</a>
             </div>
             <div className="link">
-                <FontAwesomeIcon className="icon" icon={faDonate} /><a href="https://www.paypal.me/jmullo">Donate on PayPal</a>
+                <FontAwesomeIcon className="icon" icon={faDonate} /><a href="https://www.paypal.me/jmullo">Donate with PayPal</a>
             </div>
         </div>
     );

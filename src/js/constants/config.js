@@ -1,3 +1,5 @@
+import { load } from 'api/storage';
+
 export const NUMBER_OF_ROWS = 5;
 export const ROW_HEIGHT = 37;
 export const MAX_WORD_LENGTH = 12;
@@ -10,11 +12,11 @@ export const PROPABILITY = {
 };
 
 export const OPTIONS_DEFAULT = {
-    language: 'finnish',
-    words: '20',
-    capitalisation: false,
-    punctuation: false,
-    numbers: false
+    language: load('language', 'english'),
+    words: load('words', '20'),
+    capitalisation: load('capitalisation', false),
+    punctuation: load('punctuation', false),
+    numbers: load('numbers', false)
 };
 
 export const STATE = {

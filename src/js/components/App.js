@@ -24,16 +24,11 @@ export const App = () => {
 
     return (
         <DataContext.Provider value={{ 
-            state,
-            options,
-            allWords,
-            testWords,
-            results,
-            setState,
-            setOptions,
-            setAllWords,
-            setTestWords,
-            setResults
+            state, setState,
+            options, setOptions,
+            allWords, setAllWords,
+            testWords, setTestWords,
+            results, setResults
          }}>
             <div className="top">
                 <div className="app">

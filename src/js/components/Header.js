@@ -2,16 +2,33 @@ import { useContext } from 'react';
 
 import { DataContext } from 'components/DataContext';
 import { Button } from 'components/Button';
+import { save } from 'api/storage';
 import { STATE } from 'constants/config';
 
 export const Header = () => {
 
     const { options, setOptions, setState } = useContext(DataContext);
 
-    const setAndReset = (options) => setOptions(options) || setState(STATE.RESET);
-    const handleLanguage = (language) => language !== options.language && setAndReset({...options, language });
-    const handleWords = (words) => words !== options.words && setAndReset({...options, words });
-    const handleToggle = (button) => setAndReset({...options, [button]: !options[button] });
+    const setAndResetState = (options) => setOptions(options) || setState(STATE.RESET);
+
+    const handleLanguage = (language) => {
+        if (language !== options.language) {
+            save('language', language);
+            setAndResetState({...options, language });
+        }
+    };
+
+    const handleWords = (words) => {
+        if (words !== options.words) {
+            save('words', words);
+            setAndResetState({...options, words });
+        }
+    };
+
+    const handleToggle = (button) => {
+        save(button, !options[button]);
+        setAndResetState({...options, [button]: !options[button] });
+    };
 
     return (
         <div className="header">

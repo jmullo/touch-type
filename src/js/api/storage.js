@@ -4,7 +4,7 @@ export const save = (key, item) => {
     }
 };
 
-export const load = (key) => {
+export const load = (key, defaultValue) => {
     if (localStorage) {
         const item = localStorage.getItem(`touch-type.${key}`);
 
@@ -13,5 +13,5 @@ export const load = (key) => {
         }
     }
 
-    return undefined;
+    return defaultValue;
 };
