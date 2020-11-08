@@ -11,14 +11,40 @@ html, body {
     animation: fade 0.5s ease-in;
 }
 
+:root {
+    --font-main: 'Roboto', sans-serif;
+    --font-input: 'Roboto Mono', monospace;
+
+    --main-width: 796px;
+
+    --background: rgba(170, 170, 170, 1);
+
+    --box-background: rgba(255, 255, 255, 1);
+    --box-border: rgba(100, 100, 100, 1);
+
+    --text-normal: rgba(40, 40, 40, 1);
+    --text-normal-shadow: rgba(255, 255, 255, 1);
+    --text-selected: rgba(255, 255, 255, 1);
+    --text-selected-shadow: rgba(0, 0, 0, 1);
+
+    --link-selected: rgba(230, 230, 230, 1);
+
+    --input-correct: rgba(33, 150, 243, 1);
+    --input-error: rgba(255, 0, 0, 1);
+
+    --cursor: rgba(220, 220, 220, 1);
+
+    --icon: rgba(100, 100, 100, 1);
+}
+
 #main {
     height: 100%;
-    background-color: rgb(170, 170, 170);
+    background-color: var(--background);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--font-main);
     user-select: none;
 }
 
@@ -42,9 +68,7 @@ html, body {
     align-items: flex-end;
     justify-content: space-between;
     flex-direction: row;
-    width: 800px;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
+    width: var(--main-width);
 }
 
 .footer {
@@ -53,14 +77,13 @@ html, body {
     align-items: center;
     justify-content: flex-end;
     flex-direction: row;
-    color: rgb(40, 40, 40);
-    text-shadow: rgb(255, 255, 255) 0px 0px 4px;
-    font-family: 'Roboto', sans-serif;
+    color: var(--text-normal);
+    text-shadow: var(--text-normal-shadow) 0px 0px 4px;
 }
 
 .appName {
-    color: rgb(40, 40, 40);
-    text-shadow: rgb(255, 255, 255) 0px 0px 6px;
+    color: var(--text-normal);
+    text-shadow: var(--text-normal-shadow) 0px 0px 6px;
     flex-grow: 1;
     font-size: 24px;
 }
@@ -75,26 +98,29 @@ html, body {
 }
 
 .button {
-    color: rgb(40, 40, 40);
-    text-shadow: rgb(255, 255, 255) 0px 0px 4px;
+    color: var(--text-normal);
+    text-shadow: var(--text-normal-shadow) 0px 0px 4px;
     margin: 0 4px 0 4px;
     cursor: pointer;
+    transition: color 0.2s, text-shadow 0.2s;
 }
 
-.enabled {
-    color: rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 0) 0px 0px 4px;
+.button.enabled {
+    color: var(--text-selected);
+    text-shadow: var(--text-selected-shadow) 0px 0px 4px;
+    transition: color 0.2s, text-shadow 0.2s;
 }
 
 .textArea {
     position: relative;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(100, 100, 100);
+    background-color: var(--box-background);
+    border: 1px solid var(--box-border);
     border-radius: 20px;
     padding: 16px;
     margin: 10px 0 10px 0;
-    width: 796px;
+    width: var(--main-width);
     height: 194px;
+    font-family: var(--font-input);
     font-size: 28px;
 }
 
@@ -113,12 +139,12 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(100, 100, 100);
+    background-color: var(--box-background);
+    border: 1px solid var(--box-border);
     border-radius: 16px;
     padding: 4px;
     font-size: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-input);
 }
 
 .resultValue {
@@ -131,15 +157,18 @@ html, body {
 
 .row {
     position: absolute;
-    visibility: visible;
+}
+
+.row.visible {
     opacity: 1;
-    transition: visibility 0.7s linear 0.7s, opacity 0.7s;
+    visibility: visible;
+    transition: opacity 0.4s linear 0.3s, visibility 0.4s linear 0.3s;
 }
 
 .row.hidden {
-    visibility: visible;
     opacity: 0;
-    transition: visibility 0.3s linear 0.3s, opacity 0.3s;
+    visibility: hidden;
+    transition: opacity 0.4s linear, visibility 0.4s linear;
 }
 
 .word {
@@ -147,12 +176,7 @@ html, body {
 }
 
 .char {
-    color: rgb(60, 60, 60);
-    float: left;
-}
-
-.space {
-    color: rgba(0, 0, 0, 0);
+    color: var(--text-normal);
     float: left;
 }
 
@@ -161,11 +185,11 @@ html, body {
 }
 
 .correct {
-    color: rgb(33, 150, 243);
+    color: var(--input-correct);
 }
 
 .error {
-    color: rgb(255, 0, 0);
+    color: var(--input-error);
 }
 
 .infoDialog {
@@ -195,7 +219,7 @@ html, body {
 }
 
 .icon {
-    color: rgb(100, 100, 100);
+    color: var(--icon);
 }
 
 a {
@@ -204,13 +228,15 @@ a {
 }
 
 a:link, a:visited, a:hover, a:active {
-    color: rgb(40, 40, 40);
-    text-shadow: rgb(255, 255, 255) 0px 0px 4px;
+    color: var(--text-normal);
+    text-shadow: var(--text-normal-shadow) 0px 0px 4px;
     text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
 }
 
 a:hover, a:active {
-    color: rgb(255, 255, 255);
-    text-shadow: rgb(0, 0, 0) 0px 0px 4px;
+    color: var(--link-selected);
+    text-shadow: var(--text-selected-shadow) 0px 0px 4px;
     text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
 }
