@@ -1,19 +1,21 @@
-export const Char = ({ char, typedChar, charIndex, cursorIndex }) => {
+import { memoize } from 'lodash';
+
+const charFunction = ({ char, isCorrect, isError, hasCursor }) => {
 
     let className = 'char';
-
-    if (cursorIndex === charIndex) {
-        className += ' cursor';
-    }
     
-    if (typedChar && char !== typedChar) {
+    if (isCorrect) {
+        className += ' correct';
+    } else if (isError) {
         className += ' error';
 
         if (char === ' ') {
             char = '_';
         }
-    } else if (typedChar && char === typedChar) {
-        className += ' correct';
+    }
+
+    if (hasCursor) {
+        className += ' cursor';
     }
 
     return (
@@ -25,3 +27,6 @@ export const Char = ({ char, typedChar, charIndex, cursorIndex }) => {
     );
 
 };
+
+export const Char = memoize(charFunction, ({ char, isCorrect, isError, hasCursor }) => 
+    `${char}-${isCorrect}-${isError}-${hasCursor}`);

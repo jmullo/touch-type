@@ -8,21 +8,22 @@ import { rowGenerator, getActiveRowIndex } from 'util/words';
 
 let lastKeyTime;
 
+const setLastKeyTime = (time) => lastKeyTime = time;
+
 export const TextArea = () => {
 
-    const { state, testWords, results, setState, setResults } = useContext(DataContext);
+    const { state, testWords, setState, setKeyTimes, setErrors } = useContext(DataContext);
     const [ typedText, setTypedText ] = useState([]);
-    const [ cursorIndex, setCursorIndex ] = useState(0);
-
-    let typedChar;
-    let timeNow;
 
     const testText = testWords.join(' ');
     const rows = Array.from(rowGenerator(testWords));
 
+    let typedChar;
+    let cursorIndex;
+    let timeNow;
+
     const inputRef = useCallback((element) => {
         if (element) {
-            window.getSelection().removeAllRanges();
             element.focus();
             
             element.onblur = () => {
@@ -31,10 +32,10 @@ export const TextArea = () => {
         }
     }, []);
 
-    useEffect(async () => {
+    useEffect(() => {
         if (state === STATE.RESET) {
             setTypedText([]);
-            setCursorIndex(0);
+            setLastKeyTime(null);
         }
     });
 
@@ -45,17 +46,14 @@ export const TextArea = () => {
         }
 
         if (event.nativeEvent.inputType === 'deleteContentBackward') {
-            typedText.pop();
-            setTypedText(typedText);
-            setCursorIndex(Math.max(0, cursorIndex - 1));
+            setTypedText(typedText.slice(0, -1));
+            setLastKeyTime(null);
         }
     };
 
     const handleKeypress = (event) => {
         if (state === STATE.END) {
             event.preventDefault();
-            lastKeyTime = null;
-
             return;
         }
         
@@ -72,20 +70,19 @@ export const TextArea = () => {
             typedChar = event.key;
         }
 
-        typedText.push(typedChar);
+        cursorIndex = typedText.length;
 
         if (typedChar !== testText[cursorIndex]) {
-            setResults(addError({ results, key: testText[cursorIndex] }));
-            lastKeyTime = null;
-        } else if (lastKeyTime) { 
-            setResults(addKeyTime({ results, key: testText[cursorIndex], time: timeNow - lastKeyTime }));
-            lastKeyTime = timeNow;
+            setErrors((errors) => addError(errors, testText[cursorIndex]));
+            setLastKeyTime(null);
+        } else if (lastKeyTime) {
+            setKeyTimes((keyTimes) => addKeyTime(keyTimes, testText[cursorIndex], timeNow - lastKeyTime));
+            setLastKeyTime(timeNow);
         } else {
-            lastKeyTime = timeNow;
+            setLastKeyTime(timeNow);
         }
 
-        setTypedText(typedText);
-        setCursorIndex(cursorIndex + 1);
+        setTypedText((chars) => [...chars, typedChar]);
 
         if (cursorIndex + 1 === testText.length) {
             setState(STATE.END);
@@ -108,10 +105,11 @@ export const TextArea = () => {
                     <Row
                         index={index}
                         row={row}
+                        hidden={state === STATE.END}
                         typedText={typedText}
-                        activeRowIndex={getActiveRowIndex(rows, cursorIndex)}
+                        activeRowIndex={getActiveRowIndex(rows, typedText.length)}
                         lastRowIndex={rows.length - 1}
-                        cursorIndex={cursorIndex}
+                        cursorIndex={typedText.length}
                         key={index} />
                 ))
             }

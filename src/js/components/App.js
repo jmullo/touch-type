@@ -14,12 +14,16 @@ export const App = () => {
     const [ options, newOptions ] = useState(OPTIONS_DEFAULT);
     const [ allWords, newAllWords ] = useState({});
     const [ testWords, newTestWords ] = useState([]);
+    const [ keyTimes, newKeyTimes ] = useState([]);
+    const [ errors, newErrors ] = useState([]);
     const [ results, newResults ] = useState({});
 
     const setState = (props) => newState(props);
     const setOptions = (props) => newOptions(props);
     const setAllWords = (props) => newAllWords(props);
     const setTestWords = (props) => newTestWords(props);
+    const setKeyTimes = (props) => newKeyTimes(props);
+    const setErrors = (props) => newErrors(props);
     const setResults = (props) => newResults(props);
 
     return (
@@ -28,6 +32,8 @@ export const App = () => {
             options, setOptions,
             allWords, setAllWords,
             testWords, setTestWords,
+            keyTimes, setKeyTimes,
+            errors, setErrors,
             results, setResults
          }}>
             <div className="top">

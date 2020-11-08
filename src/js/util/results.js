@@ -1,57 +1,34 @@
 import { find, mean, sortBy } from 'lodash';
 
-export const addKeyTime = ({ results, key, time }) => {
-    if (!results.keyTimes) {
-        results.keyTimes = [];
-    }
+export const addKeyTime = (keyTimes, key, time) => {
+    const existingKey = find(keyTimes, { key });
 
-    const existingTime = find(results.keyTimes, { key });
-
-    if (existingTime) {
-        existingTime.keyTimes.push(time);
+    if (existingKey) {
+        existingKey.times.push(Math.floor(time));
     } else {
-        results.keyTimes.push({ key, keyTimes: [ time ] });
+        keyTimes.push({ key, times: [ Math.floor(time) ] });
     }
 
-    return results;
+    return keyTimes;
 };
 
-export const averageKeyTimes = (results) => {
-    if (!results.keyTimes) {
-        results.keyTimes = [];
-    }
-
-    results = results.keyTimes.map((key) => {
-        key.averageTime = mean(key.keyTimes);
-
-        return key;
-    });
-
-    return sortBy(results, ['averageTime']);
-};
-
-export const addError = ({ results, key }) => {
-    if (!results.errors) {
-        results.errors = [];
-    }
-
-    const existingError = find(results.errors, { key });
+export const addError = (errors, key) => {
+    const existingError = find(errors, { key });
 
     if (existingError) {
         existingError.count++;
     } else {
-        results.errors.push({ key, count: 1 });
+        errors.push({ key, count: 1 });
     }
 
-    return results;
+    return errors;
 };
 
-export const countErrors = (results) => {
-    if (!results.errors) {
-        results.errors = [];
-    }
+export const averageKeyTimes = (keyTimes) => {
+    keyTimes.forEach((key) => key.averageTime = Math.floor(mean(key.times)));
 
-    return results.errors.reduce((sum, { count }) => {
-        return sum += count;
-    }, 0);
+    return sortBy(keyTimes, ['averageTime']);
 };
+
+export const countErrors = (errors) => 
+    errors.reduce((sum, { count }) => sum += count, 0);
