@@ -3,6 +3,7 @@ import { useContext, useState, useCallback, useEffect } from 'react';
 import { DataContext } from 'components/DataContext';
 import { Row } from 'components/Row';
 import { STATE } from 'constants/config';
+import { focusHandler } from 'util/dom';
 import { addError, addKeyTime } from 'util/results';
 import { rowGenerator, getActiveRowIndex } from 'util/words';
 
@@ -14,23 +15,14 @@ export const TextArea = () => {
 
     const { state, testWords, setState, setKeyTimes, setErrors } = useContext(DataContext);
     const [ typedText, setTypedText ] = useState([]);
-
+    const inputRef = useCallback(focusHandler, []);
+    
     const testText = testWords.join(' ');
     const rows = Array.from(rowGenerator(testWords));
 
     let typedChar;
     let cursorIndex;
     let timeNow;
-
-    const inputRef = useCallback((element) => {
-        if (element) {
-            element.focus();
-            
-            element.onblur = () => {
-                setTimeout(() => element.focus(), 1);
-            }
-        }
-    }, []);
 
     useEffect(() => {
         if (state === STATE.RESET) {
