@@ -1,12 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
 
-import { DataContext } from 'components/DataContext';
+import { Context } from 'components/Context';
 import { countErrors, averageKeyTimes } from 'util/results';
 import { STATE, CHARS_IN_WORD } from 'constants/config';
 
 export const Results = () => {
 
-    const { state, keyTimes, errors, results, testWords, setResults } = useContext(DataContext);
+    const { state, keyTimes, errors, results, testWords, setResults } = useContext(Context);
     const [ startTime, setStartTime ] = useState(null);
 
     const className = state === STATE.END ? 'results' : 'results hidden';
@@ -17,11 +17,11 @@ export const Results = () => {
 
             return (
                 <>
-                    <div className="resultValue">
-                        <span className="number">{results.wordsPerMinute}</span> words per minute
+                    <div className="resultRow">
+                        <div className="number">{results.wordsPerMinute}</div><div className="text">&nbsp;words per minute</div>
                     </div>
-                    <div className="resultValue">
-                        <span className="number">{results.accuracy}</span> % accuracy
+                    <div className="resultRow">
+                        <div className="number">{results.accuracy}</div><div className="text">&nbsp;percent accuracy</div>
                     </div>
                 </>
             );

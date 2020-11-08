@@ -34,6 +34,10 @@ html, body {
 
     --cursor: rgba(220, 220, 220, 1);
 
+    --prompt: rgba(120, 120, 120, 1);
+    --prompt-key: rgba(170, 170, 170, 1);
+    --prompt-key-background: rgba(140, 140, 140, 1);
+
     --icon: rgba(100, 100, 100, 1);
 }
 
@@ -69,6 +73,7 @@ html, body {
     justify-content: space-between;
     flex-direction: row;
     width: var(--main-width);
+    margin-bottom: 10px;
 }
 
 .footer {
@@ -111,20 +116,9 @@ html, body {
     transition: color 0.2s, text-shadow 0.2s;
 }
 
-.textArea {
-    position: relative;
-    background-color: var(--box-background);
-    border: 1px solid var(--box-border);
-    border-radius: 20px;
-    padding: 16px;
-    margin: 10px 0 10px 0;
-    width: var(--main-width);
-    height: 194px;
-    font-family: var(--font-input);
-    font-size: 28px;
-}
-
 .input {
+    position: fixed;
+    top: -1000px;
     height: 0;
     padding: 0;
     margin: 0;
@@ -133,26 +127,45 @@ html, body {
     display: block;
 }
 
+.textArea, .results {
+    position: relative;
+    background-color: var(--box-background);
+    border: 1px solid var(--box-border);
+    border-radius: 20px;
+    padding: 10px 16px 10px 16px;
+    width: var(--main-width);
+    height: 206px;
+    font-family: var(--font-input);
+}
+
+.textArea {
+    font-size: 28px;
+}
+
 .results {
-    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    background-color: var(--box-background);
-    border: 1px solid var(--box-border);
-    border-radius: 16px;
-    padding: 4px;
     font-size: 20px;
-    font-family: var(--font-input);
 }
 
-.resultValue {
+.results.hidden {
+    display: none;
+}
+
+.resultRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     margin: 0 8px 0 8px;
 }
 
-.number {
-    font-size: 24px;
+.resultRow .number {
+    width: 44px;
+    text-align: right;
+    font-size: 28px;
 }
 
 .row {
@@ -192,25 +205,33 @@ html, body {
     color: var(--input-error);
 }
 
-.infoDialog {
-    margin: 20px;
-    user-select: none;
+.status {
+    margin-top: 20px;
+    font-size: 14px;
 }
 
-.buttons {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 10px;
-    z-index: 1000;
+.prompt {
+    color: var(--prompt);
+    cursor: pointer;
 }
 
-.dialog .infoButton {
-    margin-top: 4px;
+.prompt.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s linear 0.3s, visibility 0.4s linear 0.3s;
 }
 
-.hidden {
+.prompt.hidden {
+    opacity: 0;
     visibility: hidden;
+    transition: opacity 0.4s linear, visibility 0.4s linear;
+}
+
+.key {
+    border-radius: 4px;
+    padding: 0 3px 0 3px;
+    color: var(--prompt-key);
+    background-color: var(--prompt-key-background);
 }
 
 .link {

@@ -1,15 +1,15 @@
 import { useContext, useEffect } from 'react';
 
-import { DataContext } from 'components/DataContext';
+import { Context } from 'components/Context';
 import { loadWordList } from 'api/file';
 import { selectWords  } from 'util/words';
 import { STATE } from 'constants/config';
 
 let loadedWords;
 
-export const DataLoader = () => {
+export const WordLoader = () => {
 
-    const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(DataContext);
+    const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(Context);
 
     useEffect(async () => {
         if (!allWords.english) {

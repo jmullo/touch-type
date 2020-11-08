@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { DataContext } from 'components/DataContext';
-import { DataLoader } from 'components/DataLoader';
+import { Context } from 'components/Context';
+import { WordLoader } from 'components/WordLoader';
 import { Header } from 'components/Header';
-import { TextArea } from 'components/TextArea';
-import { Results } from 'components/Results';
+import { Middle } from 'components/Middle';
+import { Status } from 'components/Status';
 import { Footer } from 'components/Footer';
 import { OPTIONS_DEFAULT, STATE } from 'constants/config';
 
@@ -27,7 +27,7 @@ export const App = () => {
     const setResults = (props) => newResults(props);
 
     return (
-        <DataContext.Provider value={{ 
+        <Context.Provider value={{ 
             state, setState,
             options, setOptions,
             allWords, setAllWords,
@@ -38,14 +38,14 @@ export const App = () => {
          }}>
             <div className="top">
                 <div className="app">
-                    <DataLoader />
+                    <WordLoader />
                     <Header />
-                    <TextArea />
-                    <Results />
+                    <Middle />
+                    <Status />
                 </div>
             </div>
             <Footer />
-        </DataContext.Provider>
+        </Context.Provider>
     );
 
 };

@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 
-import { DataContext } from 'components/DataContext';
+import { Context } from 'components/Context';
 import { Button } from 'components/Button';
 import { save } from 'api/storage';
 import { STATE } from 'constants/config';
 
 export const Header = () => {
 
-    const { options, setOptions, setState } = useContext(DataContext);
+    const { options, setOptions, setState } = useContext(Context);
 
     const setAndResetState = (options) => setOptions(options) || setState(STATE.RESET);
 

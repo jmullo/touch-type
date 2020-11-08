@@ -1,6 +1,6 @@
 import { useContext, useState, useCallback, useEffect } from 'react';
 
-import { DataContext } from 'components/DataContext';
+import { Context } from 'components/Context';
 import { Row } from 'components/Row';
 import { STATE } from 'constants/config';
 import { focusHandler } from 'util/dom';
@@ -13,10 +13,10 @@ const setLastKeyTime = (time) => lastKeyTime = time;
 
 export const TextArea = () => {
 
-    const { state, testWords, setState, setKeyTimes, setErrors } = useContext(DataContext);
+    const { state, testWords, setState, setKeyTimes, setErrors } = useContext(Context);
     const [ typedText, setTypedText ] = useState([]);
     const inputRef = useCallback(focusHandler, []);
-    
+
     const testText = testWords.join(' ');
     const rows = Array.from(rowGenerator(testWords));
 
