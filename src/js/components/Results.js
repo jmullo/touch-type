@@ -42,8 +42,9 @@ export const Results = () => {
 
             setResults({ ...results, wordsPerMinute, accuracy });
             setStartTime(null);
-        } else if (state === STATE.RESET) {
+        } else if (startTime && (state === STATE.RESET || state === STATE.BEGIN)) {
             setResults({});
+            setStartTime(null);
         }
     });
 

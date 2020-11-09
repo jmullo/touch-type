@@ -27,7 +27,7 @@ export const App = () => {
     const setResults = (props) => newResults(props);
 
     return (
-        <Context.Provider value={{ 
+        <Context.Provider value={{
             state, setState,
             options, setOptions,
             allWords, setAllWords,

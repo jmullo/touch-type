@@ -40,6 +40,10 @@ export const TextArea = () => {
         if (event.nativeEvent.inputType === 'deleteContentBackward') {
             setTypedText(typedText.slice(0, -1));
             setLastKeyTime(null);
+
+            if (typedText.length === 1 && state !== STATE.BEGIN) {
+                setState(STATE.BEGIN);
+            }
         }
     };
 
@@ -48,7 +52,7 @@ export const TextArea = () => {
             event.preventDefault();
             return;
         }
-        
+
         timeNow = performance.now();
 
         if (state !== STATE.TESTING) {
@@ -85,7 +89,6 @@ export const TextArea = () => {
         <div className="textArea">
             <input
                 autoFocus
-                id="text"
                 className="input"
                 tabIndex="0"
                 autoComplete="off"

@@ -12,16 +12,26 @@ export const Status = () => {
     const handleKeypress = (event) => {
         event.preventDefault();
 
-        if (event.key === 'Enter') {
+        if (state === STATE.END && event.key === 'Enter') {
             setState(STATE.RESET);
         }
     };
 
     const handleClick = () => {
-        setState(STATE.RESET);
+        if (state === STATE.END) {
+            setState(STATE.RESET);
+        }
     };
 
-    const className = state === STATE.END ? 'prompt visible' : 'prompt hidden';
+    let className;
+
+    if (state === STATE.BEGIN ) {
+        className = 'prompt visible';
+    } else if (state === STATE.END) {
+        className = 'prompt visible clickable';
+    } else {
+        className = 'prompt hidden';
+    }
 
     return (
         <div className="status">
@@ -29,14 +39,22 @@ export const Status = () => {
                 state === STATE.END &&
                 <input
                     autoFocus
-                    id="status"
                     className="input"
                     tabIndex="0"
                     autoComplete="off"
                     ref={inputRef}
                     onKeyPress={handleKeypress} />
-            }            
-            <div className={className} onClick={handleClick}>Press <span className="key">Enter</span> to continue</div>  
+            }
+            <div className={className} onClick={handleClick}>
+                {
+                    state === STATE.END &&
+                    <>Press <span className="key">Enter</span> to continue</>
+                }
+                {
+                    state !== STATE.END &&
+                    <>Start typing</>
+                }
+            </div>
         </div>
     );
 

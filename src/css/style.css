@@ -34,9 +34,9 @@ html, body {
 
     --cursor: rgba(220, 220, 220, 1);
 
-    --prompt: rgba(120, 120, 120, 1);
+    --prompt: rgba(110, 110, 110, 1);
     --prompt-key: rgba(170, 170, 170, 1);
-    --prompt-key-background: rgba(140, 140, 140, 1);
+    --prompt-key-background: rgba(110, 110, 110, 1);
 
     --icon: rgba(100, 100, 100, 1);
 }
@@ -156,16 +156,16 @@ html, body {
 
 .resultRow {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     flex-direction: row;
-    margin: 0 8px 0 8px;
+    margin: 0 10px 0 10px;
 }
 
 .resultRow .number {
-    width: 44px;
     text-align: right;
     font-size: 28px;
+    line-height: 28px;
 }
 
 .row {
@@ -175,13 +175,13 @@ html, body {
 .row.visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.4s linear 0.3s, visibility 0.4s linear 0.3s;
+    transition: opacity 0.3s linear 0.2s, visibility 0.3s linear 0.2s;
 }
 
 .row.hidden {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s linear, visibility 0.4s linear;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
 }
 
 .word {
@@ -206,25 +206,33 @@ html, body {
 }
 
 .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 20px;
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .prompt {
     color: var(--prompt);
-    cursor: pointer;
 }
 
 .prompt.visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.4s linear 0.3s, visibility 0.4s linear 0.3s;
+    transition: opacity 0.4s, visibility 0.4s;
 }
 
 .prompt.hidden {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s linear, visibility 0.4s linear;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .key {
