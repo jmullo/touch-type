@@ -154,15 +154,23 @@ html, body {
     display: none;
 }
 
-.resultRow {
+.resultColumn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 2px 0 2px 0;
+}
+
+.resultItem {
     display: flex;
     align-items: flex-end;
     justify-content: center;
     flex-direction: row;
-    margin: 0 10px 0 10px;
+    margin: 2px 10px 2px 10px;
 }
 
-.resultRow .number {
+.resultItem .number {
     text-align: right;
     font-size: 28px;
     line-height: 28px;

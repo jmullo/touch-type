@@ -17,6 +17,7 @@ export const App = () => {
     const [ keyTimes, newKeyTimes ] = useState([]);
     const [ errors, newErrors ] = useState([]);
     const [ results, newResults ] = useState({});
+    const [ history, newHistory ] = useState({});
 
     const setState = (props) => newState(props);
     const setOptions = (props) => newOptions(props);
@@ -25,6 +26,7 @@ export const App = () => {
     const setKeyTimes = (props) => newKeyTimes(props);
     const setErrors = (props) => newErrors(props);
     const setResults = (props) => newResults(props);
+    const setHistory = (props) => newHistory(props);
 
     return (
         <Context.Provider value={{
@@ -34,7 +36,8 @@ export const App = () => {
             testWords, setTestWords,
             keyTimes, setKeyTimes,
             errors, setErrors,
-            results, setResults
+            results, setResults,
+            history, setHistory
          }}>
             <div className="top">
                 <div className="app">
