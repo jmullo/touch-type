@@ -6,6 +6,6 @@ import { App } from 'components/App';
 
 import 'fontsource-roboto/400-normal.css';
 import 'fontsource-roboto-mono/400-normal.css';
-import 'style.css';
+import 'main.css';
 
 export default render(<App />, document.getElementById('main'));

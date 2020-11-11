@@ -3,10 +3,10 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faDonate } from '@fortawesome/free-solid-svg-icons';
 
-export const Footer = () => {
+export const Links = () => {
 
     return (
-        <div className="footer">
+        <div className="links">
             <div className="link">
                 <FontAwesomeIcon className="icon" icon={faEnvelope} />
                 <a href="mailto:jussi.mullo@iki.fi">jussi.mullo@iki.fi</a>

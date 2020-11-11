@@ -1,0 +1,75 @@
+@import 'variables.css';
+@import 'header.css';
+@import 'text.css';
+@import 'results.css';
+@import 'status.css';
+@import 'links.css';
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    animation: fade 0.5s ease-in;
+}
+
+#main {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--background);
+    font-family: var(--font-main);
+    user-select: none;
+}
+
+.top {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.header {
+    width: var(--main-width);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.middle {
+    width: var(--main-width);
+    height: 206px;
+    padding: 10px 16px 10px 16px;
+    border: 1px solid var(--box-border);
+    border-radius: 20px;
+    background-color: var(--box-background);
+}
+
+.text {
+    position: relative;
+}
+
+.results {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status {
+    height: 20px;
+    margin-top: 20px;
+}
+
+.bottom {
+    height: 40px;
+    display: flex;
+    align-items: center;
+}

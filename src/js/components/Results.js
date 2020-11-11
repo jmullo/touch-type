@@ -38,10 +38,10 @@ export const Results = () => {
                 results.wordsPerMinute &&
                 <div className="resultColumn">
                     <div className="resultItem">
-                        <div className="number">{results.wordsPerMinute}</div><div className="text">&nbsp;words per minute,</div>
+                        <div className="number">{results.wordsPerMinute}</div><div className="unit">&nbsp;words per minute,</div>
                     </div>
                     <div className="resultItem">
-                        <div className="number">{results.accuracy}</div><div className="text">&nbsp;percent accuracy,</div>
+                        <div className="number">{results.accuracy}</div><div className="unit">&nbsp;percent accuracy,</div>
                     </div>
                 </div>
             }
@@ -49,10 +49,10 @@ export const Results = () => {
                 history.averageWordsPerMinute &&
                 <div className="resultColumn">
                     <div className="resultItem">
-                        <div className="number">{history.averageWordsPerMinute}</div><div className="text">&nbsp;average</div>
+                        <div className="number">{history.averageWordsPerMinute}</div><div className="unit">&nbsp;average</div>
                     </div>
                     <div className="resultItem">
-                        <div className="number">{history.averageAccuracy}</div><div className="text">&nbsp;average</div>
+                        <div className="number">{history.averageAccuracy}</div><div className="unit">&nbsp;average</div>
                     </div>
                 </div>
             }

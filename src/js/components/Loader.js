@@ -7,7 +7,7 @@ import { STATE } from 'constants/config';
 
 let loadedWords;
 
-export const WordLoader = () => {
+export const Loader = () => {
 
     const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(Context);
 

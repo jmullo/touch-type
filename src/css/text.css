@@ -1,0 +1,68 @@
+@keyframes caret {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.input {
+    position: fixed;
+    top: -1000px;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    display: block;
+}
+
+.row {
+    position: absolute;
+    font-family: var(--font-input);
+    font-size: 28px;
+}
+
+.row.visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s linear 0.2s, visibility 0.3s linear 0.2s;
+}
+
+.row.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
+}
+
+.word {
+    float: left;
+}
+
+.char {
+    float: left;
+    color: var(--input-text);
+}
+
+.correct {
+    color: var(--input-correct);
+}
+
+.error {
+    color: var(--input-error);
+}
+
+.caret {
+    position: relative;
+}
+
+.caret.old {
+    background-color: rgb(220, 220, 220);
+}
+
+div.caret::before {
+    position: absolute;
+    left: -1px;
+    width: 2px;
+    height: 37px;
+    border-left: 2px solid var(--caret);
+    content: "";
+    animation: caret 1s step-end 0s infinite;
+}

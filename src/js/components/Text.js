@@ -11,7 +11,7 @@ let lastKeyTime;
 
 const setLastKeyTime = (time) => lastKeyTime = time;
 
-export const TextArea = () => {
+export const Text = () => {
 
     const { state, testWords, setState, setKeyTimes, setErrors } = useContext(Context);
     const [ typedText, setTypedText ] = useState([]);
@@ -86,7 +86,7 @@ export const TextArea = () => {
     };
 
     return (
-        <div className="textArea">
+        <div className="text">
             <input
                 autoFocus
                 className="input"

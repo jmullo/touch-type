@@ -1,9 +1,9 @@
 import { load } from 'api/storage';
 
 export const NUMBER_OF_ROWS = 5;
-export const ROW_HEIGHT = 37;
-export const ROW_LENGTH_CHARS = 48;
+export const ROW_HEIGHT_PX = 37;
 export const MAX_WORD_LENGTH = 12;
+export const CHAR_WIDTH_PX = 16.81;
 export const CHARS_IN_WORD = 5;
 export const NUMBER_OF_SLOW_KEYS = 5;
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import { Context } from 'components/Context';
-import { WordLoader } from 'components/WordLoader';
+import { Loader } from 'components/Loader';
 import { Header } from 'components/Header';
 import { Middle } from 'components/Middle';
 import { Status } from 'components/Status';
-import { Footer } from 'components/Footer';
+import { Links } from 'components/Links';
 import { OPTIONS_DEFAULT, STATE } from 'constants/config';
 
 export const App = () => {
@@ -40,14 +40,14 @@ export const App = () => {
             history, setHistory
          }}>
             <div className="top">
-                <div className="app">
-                    <WordLoader />
-                    <Header />
-                    <Middle />
-                    <Status />
-                </div>
+                <Loader />
+                <Header />
+                <Middle />
+                <Status />
             </div>
-            <Footer />
+            <div className="bottom">
+                <Links />
+            </div>
         </Context.Provider>
     );
 

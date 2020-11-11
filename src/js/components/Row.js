@@ -1,5 +1,5 @@
 import { Char } from 'components/Char';
-import { ROW_HEIGHT, NUMBER_OF_ROWS } from 'constants/config';
+import { ROW_HEIGHT_PX, NUMBER_OF_ROWS } from 'constants/config';
 
 export const Row = ({ index, row, hidden, activeRowIndex, typedText, caretIndex }) => {
 
@@ -7,7 +7,7 @@ export const Row = ({ index, row, hidden, activeRowIndex, typedText, caretIndex 
                   (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
 
     const className = (hidden || hide) ? "row hidden" : "row visible";
-    const style = { top: `${10 + (row.number * 4) + (row.number * ROW_HEIGHT)}px` };
+    const style = { top: `${(row.number * 4) + (row.number * ROW_HEIGHT_PX)}px` };
 
     let charIndex = row.charIndex;
 
