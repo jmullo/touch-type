@@ -17,7 +17,7 @@
 .row {
     position: absolute;
     font-family: var(--font-input);
-    font-size: 28px;
+    font-size: var(--font-large);
 }
 
 .row.visible {

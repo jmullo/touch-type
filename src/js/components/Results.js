@@ -36,22 +36,22 @@ export const Results = () => {
         <div className={className}>
             {
                 results.wordsPerMinute &&
-                <div className="resultColumn">
-                    <div className="resultItem">
+                <div className="column">
+                    <div className="result">
                         <div className="number">{results.wordsPerMinute}</div><div className="unit">&nbsp;words per minute,</div>
                     </div>
-                    <div className="resultItem">
+                    <div className="result">
                         <div className="number">{results.accuracy}</div><div className="unit">&nbsp;percent accuracy,</div>
                     </div>
                 </div>
             }
             {
                 history.averageWordsPerMinute &&
-                <div className="resultColumn">
-                    <div className="resultItem">
+                <div className="column">
+                    <div className="result">
                         <div className="number">{history.averageWordsPerMinute}</div><div className="unit">&nbsp;average</div>
                     </div>
-                    <div className="resultItem">
+                    <div className="result">
                         <div className="number">{history.averageAccuracy}</div><div className="unit">&nbsp;average</div>
                     </div>
                 </div>

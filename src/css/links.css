@@ -5,7 +5,7 @@
 
 .link {
     margin: 0 14px 0 14px;
-    font-size: 15px;
+    font-size: var(--font-icon);
 }
 
 .icon {
@@ -14,7 +14,7 @@
 
 a {
     margin-left: 6px;
-    font-size: 14px;
+    font-size: var(--font-option);
 }
 
 a:link, a:visited, a:hover, a:active {

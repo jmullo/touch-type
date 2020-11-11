@@ -47,9 +47,9 @@ html, body {
     width: var(--main-width);
     height: 206px;
     padding: 10px 16px 10px 16px;
-    border: 1px solid var(--box-border);
+    border: 1px solid var(--middle-border);
     border-radius: 20px;
-    background-color: var(--box-background);
+    background-color: var(--middle-background);
 }
 
 .text {

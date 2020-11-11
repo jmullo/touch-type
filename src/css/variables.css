@@ -4,17 +4,21 @@
 
     --main-width: 796px;
 
+    --font-large: 28px;
+    --font-small: 20px;
+    --font-option: 14px;
+    --font-status: 16px;
+    --font-icon: 15px;
+
     --background: rgba(170, 170, 170, 1);
 
-    --box-background: rgba(255, 255, 255, 1);
-    --box-border: rgba(100, 100, 100, 1);
+    --middle-background: rgba(255, 255, 255, 1);
+    --middle-border: rgba(100, 100, 100, 1);
 
     --text-normal: rgba(40, 40, 40, 1);
     --text-normal-shadow: rgba(255, 255, 255, 1);
     --text-selected: rgba(255, 255, 255, 1);
     --text-selected-shadow: rgba(0, 0, 0, 1);
-
-    --link-selected: rgba(230, 230, 230, 1);
 
     --input-text: rgba(170, 170, 170, 1);
     --input-correct: rgba(0, 0, 0, 1);
@@ -27,4 +31,6 @@
     --hint-key-background: rgba(110, 110, 110, 1);
 
     --icon: rgba(100, 100, 100, 1);
+
+    --link-selected: rgba(230, 230, 230, 1);
 }

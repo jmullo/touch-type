@@ -1,6 +1,6 @@
 .hint {
     color: var(--hint);
-    font-size: 16px;
+    font-size: var(--font-status);
 }
 
 .hint.visible {
