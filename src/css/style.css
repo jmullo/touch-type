@@ -3,6 +3,11 @@
     to { opacity: 1; }
 }
 
+@keyframes caret {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 html, body {
     height: 100%;
     overflow: hidden;
@@ -29,14 +34,15 @@ html, body {
 
     --link-selected: rgba(230, 230, 230, 1);
 
-    --input-correct: rgba(33, 150, 243, 1);
+    --input-text: rgba(170, 170, 170, 1);
+    --input-correct: rgba(0, 0, 0, 1);
     --input-error: rgba(255, 0, 0, 1);
 
-    --cursor: rgba(220, 220, 220, 1);
+    --caret: rgba(0, 0, 0, 1);
 
-    --prompt: rgba(110, 110, 110, 1);
-    --prompt-key: rgba(170, 170, 170, 1);
-    --prompt-key-background: rgba(110, 110, 110, 1);
+    --hint: rgba(110, 110, 110, 1);
+    --hint-key: rgba(170, 170, 170, 1);
+    --hint-key-background: rgba(110, 110, 110, 1);
 
     --icon: rgba(100, 100, 100, 1);
 }
@@ -197,12 +203,26 @@ html, body {
 }
 
 .char {
-    color: var(--text-normal);
+    color: var(--input-text);
     float: left;
 }
 
-.cursor {
+.caret {
+    position: relative;
+}
+
+.caret.old {
     background-color: rgb(220, 220, 220);
+}
+
+div.caret::before {
+    border-left: 2px solid var(--caret);
+    width: 2px;
+    height: 37px;
+    content: "";
+    position: absolute;
+    left: -1px;
+    animation: caret 1s step-end 0s infinite;
 }
 
 .correct {
@@ -223,17 +243,17 @@ html, body {
     font-size: 16px;
 }
 
-.prompt {
-    color: var(--prompt);
+.hint {
+    color: var(--hint);
 }
 
-.prompt.visible {
+.hint.visible {
     opacity: 1;
     visibility: visible;
     transition: opacity 0.4s, visibility 0.4s;
 }
 
-.prompt.hidden {
+.hint.hidden {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s, visibility 0.4s;
@@ -246,8 +266,8 @@ html, body {
 .key {
     border-radius: 4px;
     padding: 0 3px 0 3px;
-    color: var(--prompt-key);
-    background-color: var(--prompt-key-background);
+    color: var(--hint-key);
+    background-color: var(--hint-key-background);
 }
 
 .link {

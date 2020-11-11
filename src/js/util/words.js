@@ -29,7 +29,7 @@ const numbers = (enabled, words) => {
 export const selectWords = ({ options, list }) => {
     let selectedWords = [];
     let word;
-    
+
     while (selectedWords.length < options.words) {
         word = sample(list[options.language]);
 
@@ -44,8 +44,8 @@ export const selectWords = ({ options, list }) => {
     return selectedWords;
 };
 
-export const getActiveRowIndex = (rows, cursorIndex) => 
-    findIndex(rows, (row) => (cursorIndex >= row.charIndex && cursorIndex < row.charIndex + row.length ));
+export const getActiveRowIndex = (rows, caretIndex) =>
+    findIndex(rows, (row) => (caretIndex >= row.charIndex && caretIndex < row.charIndex + row.length ));
 
 const getRow = (words) => {
     const array = [];
@@ -75,7 +75,7 @@ function *rowNumberGenerator() {
 export function *rowGenerator(words) {
     const array = cloneDeep(words);
     const rowNumberIterator = rowNumberGenerator();
-    
+
     let charIndex = 0;
 
     while (array.length) {

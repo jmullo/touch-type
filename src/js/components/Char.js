@@ -1,9 +1,9 @@
 import { memoize } from 'lodash';
 
-const charFunction = ({ char, isCorrect, isError, hasCursor }) => {
+const charFunction = ({ char, isCorrect, isError, hasCaret }) => {
 
     let className = 'char';
-    
+
     if (isCorrect) {
         className += ' correct';
     } else if (isError) {
@@ -14,8 +14,8 @@ const charFunction = ({ char, isCorrect, isError, hasCursor }) => {
         }
     }
 
-    if (hasCursor) {
-        className += ' cursor';
+    if (hasCaret) {
+        className += ' caret';
     }
 
     return (
@@ -28,5 +28,5 @@ const charFunction = ({ char, isCorrect, isError, hasCursor }) => {
 
 };
 
-export const Char = memoize(charFunction, ({ char, isCorrect, isError, hasCursor }) => 
-    `${char}-${isCorrect}-${isError}-${hasCursor}`);
+export const Char = memoize(charFunction, ({ char, isCorrect, isError, hasCaret }) =>
+    `${char}-${isCorrect}-${isError}-${hasCaret}`);

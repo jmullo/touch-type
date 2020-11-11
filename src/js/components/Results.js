@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 
 import { Context } from 'components/Context';
-import { mergeToHistory, calculateSpeed, calculateAccuracy, averageKeyTimes } from 'util/results';
+import { mergeToHistory, calculateSpeed, calculateAccuracy } from 'util/results';
 import { STATE } from 'constants/config';
 
 export const Results = () => {

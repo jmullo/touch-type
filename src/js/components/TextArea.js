@@ -21,7 +21,7 @@ export const TextArea = () => {
     const rows = Array.from(rowGenerator(testWords));
 
     let typedChar;
-    let cursorIndex;
+    let caretIndex;
     let timeNow;
 
     useEffect(() => {
@@ -66,13 +66,13 @@ export const TextArea = () => {
             typedChar = event.key;
         }
 
-        cursorIndex = typedText.length;
+        caretIndex = typedText.length;
 
-        if (typedChar !== testText[cursorIndex]) {
-            setErrors((errors) => addError(errors, testText[cursorIndex]));
+        if (typedChar !== testText[caretIndex]) {
+            setErrors((errors) => addError(errors, testText[caretIndex]));
             setLastKeyTime(null);
         } else if (lastKeyTime) {
-            setKeyTimes((keyTimes) => addKeyTime(keyTimes, testText[cursorIndex], timeNow - lastKeyTime));
+            setKeyTimes((keyTimes) => addKeyTime(keyTimes, testText[caretIndex], timeNow - lastKeyTime));
             setLastKeyTime(timeNow);
         } else {
             setLastKeyTime(timeNow);
@@ -80,7 +80,7 @@ export const TextArea = () => {
 
         setTypedText((chars) => [...chars, typedChar]);
 
-        if (cursorIndex + 1 === testText.length) {
+        if (caretIndex + 1 === testText.length) {
             setState(STATE.END);
         }
     };
@@ -103,8 +103,7 @@ export const TextArea = () => {
                         hidden={state === STATE.END}
                         typedText={typedText}
                         activeRowIndex={getActiveRowIndex(rows, typedText.length)}
-                        lastRowIndex={rows.length - 1}
-                        cursorIndex={typedText.length}
+                        caretIndex={typedText.length}
                         key={index} />
                 ))
             }

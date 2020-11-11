@@ -1,6 +1,6 @@
-import { find, mean, sortBy, cloneDeep } from 'lodash';
+import { find, mean, orderBy, cloneDeep } from 'lodash';
 
-import { CHARS_IN_WORD } from 'constants/config';
+import { CHARS_IN_WORD, NUMBER_OF_SLOW_KEYS } from 'constants/config';
 
 export const addKeyTime = (keyTimes, key, time) => {
     const existingKey = find(keyTimes, { key });
@@ -26,10 +26,16 @@ export const addError = (errors, key) => {
     return errors;
 };
 
-export const averageKeyTimes = (keyTimes) => {
+const averageKeyTimes = (keyTimes) => {
     keyTimes.forEach((key) => key.averageTime = Math.floor(mean(key.times)));
 
-    return sortBy(keyTimes, ['averageTime']);
+    return orderBy(keyTimes, ['averageTime'], ['desc']);
+};
+
+export const getSlowestKeys = (keyTimes) => {
+    const sortedKeys = averageKeyTimes(keyTimes);
+
+    return sortedKeys.slice(0, NUMBER_OF_SLOW_KEYS).map((item) => item.key);
 };
 
 export const countErrors = (errors) =>
@@ -72,6 +78,7 @@ export const mergeToHistory = (currentHistory, textLength, timeMinutes, keyTimes
 
     history.averageWordsPerMinute = calculateSpeed(history.textLength, history.timeMinutes);
     history.averageAccuracy = calculateAccuracy(history.textLength, history.errors);
+    history.slowestKeys = getSlowestKeys(history.keyTimes);
 
     return history;
 };

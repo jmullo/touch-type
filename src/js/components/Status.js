@@ -26,11 +26,11 @@ export const Status = () => {
     let className;
 
     if (state === STATE.BEGIN ) {
-        className = 'prompt visible';
+        className = 'hint visible';
     } else if (state === STATE.END) {
-        className = 'prompt visible clickable';
+        className = 'hint visible clickable';
     } else {
-        className = 'prompt hidden';
+        className = 'hint hidden';
     }
 
     return (

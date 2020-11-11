@@ -1,12 +1,10 @@
 import { Char } from 'components/Char';
 import { ROW_HEIGHT, NUMBER_OF_ROWS } from 'constants/config';
 
-export const Row = ({ index, row, hidden, activeRowIndex, lastRowIndex, typedText, cursorIndex }) => {
+export const Row = ({ index, row, hidden, activeRowIndex, typedText, caretIndex }) => {
 
-    //console.log(`index: ${index}, active: ${activeRowIndex}, number: ${row.number}, length: ${row.length}`);
-
-    const hide = (/*lastRowIndex - index >= NUMBER_OF_ROWS &&*/ (activeRowIndex - index) > 1) || 
-                   (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
+    const hide = ((activeRowIndex - index) > 1) ||
+                  (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
 
     const className = (hidden || hide) ? "row hidden" : "row visible";
     const style = { top: `${10 + (row.number * 4) + (row.number * ROW_HEIGHT)}px` };
@@ -20,23 +18,23 @@ export const Row = ({ index, row, hidden, activeRowIndex, lastRowIndex, typedTex
                     <div className="word" key={charIndex}>
                         {
                             word.split('').map((char) => (
-                                <Char 
+                                <Char
                                     char={char}
                                     isCorrect={typedText[charIndex] && char === typedText[charIndex]}
                                     isError={typedText[charIndex] && char !== typedText[charIndex]}
-                                    hasCursor={cursorIndex === charIndex}
+                                    hasCaret={caretIndex === charIndex}
                                     key={charIndex++} />
                             ))
                         }
                         {
-                            <Char 
+                            <Char
                                 char={" "}
                                 isCorrect={typedText[charIndex] && " " === typedText[charIndex]}
                                 isError={typedText[charIndex] && " " !== typedText[charIndex]}
-                                hasCursor={cursorIndex === charIndex++} />
+                                hasCaret={caretIndex === charIndex++} />
                         }
                     </div>
-                ))   
+                ))
             }
         </div>
     );
