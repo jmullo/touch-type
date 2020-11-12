@@ -38,16 +38,12 @@ export const App = () => {
             errors, setErrors,
             results, setResults,
             history, setHistory
-         }}>
-            <div className="top">
-                <Loader />
-                <Header />
-                <Middle />
-                <Status />
-            </div>
-            <div className="bottom">
-                <Links />
-            </div>
+        }}>
+            <Loader />
+            <Header />
+            <Middle />
+            <Status />
+            <Links />
         </Context.Provider>
     );
 

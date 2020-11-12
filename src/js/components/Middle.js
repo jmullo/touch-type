@@ -11,8 +11,10 @@ export const Middle = () => {
 
     return (
         <div className="middle">
-            { state !== STATE.END && <Text /> }
-            { <Results /> }
+            <div className="box">
+                { state !== STATE.END && <Text /> }
+                { <Results /> }
+            </div>
         </div>
     );
 

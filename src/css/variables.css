@@ -7,30 +7,34 @@
     --font-large: 28px;
     --font-small: 20px;
     --font-option: 14px;
-    --font-status: 16px;
-    --font-icon: 15px;
+    --font-status: 17px;
+    --font-icon: 14px;
 
-    --background: rgba(170, 170, 170, 1);
+    --background: rgba(160, 160, 160, 1);
+    --background-dark: rgba(80, 80, 80, 1);
 
-    --middle-background: rgba(255, 255, 255, 1);
-    --middle-border: rgba(100, 100, 100, 1);
+    --middle-border: rgba(125, 125, 125, 1);
+
+    --box-background: rgba(255, 255, 255, 1);
+    --box-shadow: rgba(40, 40, 40, 1);
 
     --text-normal: rgba(40, 40, 40, 1);
     --text-normal-shadow: rgba(255, 255, 255, 1);
-    --text-selected: rgba(255, 255, 255, 1);
+    --text-selected: rgba(245, 245, 245, 1);
     --text-selected-shadow: rgba(0, 0, 0, 1);
 
-    --input-text: rgba(170, 170, 170, 1);
-    --input-correct: rgba(0, 0, 0, 1);
+    --input-text: rgba(180, 180, 180, 1);
+    --input-correct: rgba(40, 40, 40, 1);
     --input-error: rgba(255, 0, 0, 1);
 
     --caret: rgba(0, 0, 0, 1);
 
-    --hint: rgba(110, 110, 110, 1);
-    --hint-key: rgba(170, 170, 170, 1);
-    --hint-key-background: rgba(110, 110, 110, 1);
+    --hint: rgba(160, 160, 160, 1);
+    --hint-key: rgba(80, 80, 80, 1);
+    --hint-key-background: rgba(160, 160, 160, 1);
 
-    --icon: rgba(100, 100, 100, 1);
+    --icon: rgba(120, 120, 120, 1);
 
-    --link-selected: rgba(230, 230, 230, 1);
+    --link: rgba(120, 120, 120, 1);
+    --link-selected: rgba(180, 180, 180, 1);
 }
