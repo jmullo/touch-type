@@ -2,26 +2,34 @@
     display: none;
 }
 
-.column {
-    margin: 2px 0 2px 0;
+.results > .row {
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    flex-direction: column;
     font-family: var(--font-input);
     font-size: var(--font-small);
 }
 
-.result {
-    margin: 2px 10px 2px 10px;
+.cell {
     display: flex;
     align-items: flex-end;
-    justify-content: center;
-    flex-direction: row;
+    justify-content: flex-end;
 }
 
-.result .number {
-    line-height: 28px;
+.empty {
+    height: 28px;
+}
+
+.cell:nth-child(1) {
+    width: 280px;
+}
+
+.cell:nth-child(2) {
+    width: 150px;
+    margin-left: 14px;
+}
+
+.number {
+    width: 52px;
+    line-height: 31px;
     font-size: var(--font-large);
     text-align: right;
 }

@@ -1,26 +1,30 @@
 import { find, mean, orderBy, cloneDeep } from 'lodash';
 
-import { CHARS_IN_WORD, NUMBER_OF_SLOW_KEYS } from 'constants/config';
+import { CHARS_IN_WORD, NUMBER_OF_SLOW_KEYS, NUMBER_OF_ERROR_KEYS } from 'constants/config';
 
 export const addKeyTime = (keyTimes, key, time) => {
-    const existingKey = find(keyTimes, { key });
+    if (key !== ' ') {
+        const existingKey = find(keyTimes, { key });
 
-    if (existingKey) {
-        existingKey.times.push(Math.floor(time));
-    } else {
-        keyTimes.push({ key, times: [ Math.floor(time) ] });
+        if (existingKey) {
+            existingKey.times.push(Math.floor(time));
+        } else {
+            keyTimes.push({ key, times: [ Math.floor(time) ] });
+        }
     }
 
     return keyTimes;
 };
 
 export const addError = (errors, key) => {
-    const existingError = find(errors, { key });
+    if (key !== ' ') {
+        const existingError = find(errors, { key });
 
-    if (existingError) {
-        existingError.count++;
-    } else {
-        errors.push({ key, count: 1 });
+        if (existingError) {
+            existingError.count++;
+        } else {
+            errors.push({ key, count: 1 });
+        }
     }
 
     return errors;
@@ -32,7 +36,13 @@ const averageKeyTimes = (keyTimes) => {
     return orderBy(keyTimes, ['averageTime'], ['desc']);
 };
 
-export const getSlowestKeys = (keyTimes) => {
+const getErrorKeys = (errors) => {
+    const sortedKeys = orderBy(errors, ['count'], ['desc']);
+
+    return sortedKeys.slice(0, NUMBER_OF_ERROR_KEYS).map((item) => item.key);
+};
+
+const getSlowestKeys = (keyTimes) => {
     const sortedKeys = averageKeyTimes(keyTimes);
 
     return sortedKeys.slice(0, NUMBER_OF_SLOW_KEYS).map((item) => item.key);
@@ -79,6 +89,7 @@ export const mergeToHistory = (currentHistory, textLength, timeMinutes, keyTimes
     history.averageWordsPerMinute = calculateSpeed(history.textLength, history.timeMinutes);
     history.averageAccuracy = calculateAccuracy(history.textLength, history.errors);
     history.slowestKeys = getSlowestKeys(history.keyTimes);
+    history.errorKeys = getErrorKeys(history.errors);
 
     return history;
 };

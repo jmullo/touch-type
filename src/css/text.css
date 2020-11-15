@@ -20,19 +20,19 @@
     display: block;
 }
 
-.row {
+.text > .row {
     position: absolute;
     font-family: var(--font-input);
     font-size: var(--font-large);
 }
 
-.row.visible {
+.text > .row.visible {
     visibility: visible;
     opacity: 1;
     transition: opacity 0.3s linear 0.2s, visibility 0.3s linear 0.2s;
 }
 
-.row.hidden {
+.text > .row.hidden {
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s linear, visibility 0.3s linear;

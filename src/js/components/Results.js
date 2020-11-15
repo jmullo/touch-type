@@ -36,25 +36,45 @@ export const Results = () => {
         <div className={className}>
             {
                 results.wordsPerMinute &&
-                <div className="column">
-                    <div className="result">
-                        <div className="number">{results.wordsPerMinute}</div><div className="unit">&nbsp;words per minute,</div>
+                <>
+                    <div className="row">
+                        <div className="cell">
+                            <div className="number">{results.wordsPerMinute}</div>
+                            <div>&nbsp;words per minute,</div>
+                        </div>
+                        <div className="cell">
+                            <div className="number">{history.averageWordsPerMinute}</div>
+                            <div>&nbsp;average</div>
+                        </div>
                     </div>
-                    <div className="result">
-                        <div className="number">{results.accuracy}</div><div className="unit">&nbsp;percent accuracy,</div>
+                    <div className="row">
+                        <div className="cell">
+                            <div className="number">{results.accuracy}</div>
+                            <div>&nbsp;percent accuracy,</div>
+                        </div>
+                        <div className="cell">
+                            <div className="number">{history.averageAccuracy}</div>
+                            <div>&nbsp;average</div>
+                        </div>
                     </div>
-                </div>
-            }
-            {
-                history.averageWordsPerMinute &&
-                <div className="column">
-                    <div className="result">
-                        <div className="number">{history.averageWordsPerMinute}</div><div className="unit">&nbsp;average</div>
+                    <div className="row empty"></div>
+                    <div className="row">
+                        <div className="cell">
+                            <div>slowest characters:</div>
+                        </div>
+                        <div className="cell">
+                            <div>{history.slowestKeys.join('')}</div>
+                        </div>
                     </div>
-                    <div className="result">
-                        <div className="number">{history.averageAccuracy}</div><div className="unit">&nbsp;average</div>
+                    <div className="row">
+                        <div className="cell">
+                            <div>typo characters:</div>
+                        </div>
+                        <div className="cell">
+                            <div>{history.errorKeys.join('')}</div>
+                        </div>
                     </div>
-                </div>
+                </>
             }
         </div>
     );
