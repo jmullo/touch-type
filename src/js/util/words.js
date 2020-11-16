@@ -1,13 +1,13 @@
 import { sample, cloneDeep, findIndex, upperFirst } from 'lodash';
 
-import { PROPABILITY, NUMBER_OF_ROWS, MAX_WORD_LENGTH, CHAR_WIDTH_PX } from 'constants/config';
+import { PROBABILITY, NUMBER_OF_ROWS, MAX_WORD_LENGTH, CHAR_WIDTH_PX } from 'constants/config';
 
 const probability = (number) => Math.random() <= number;
 
 const addCapitalisation = (enabled, words) => {
     if (enabled) {
         words.forEach((word, index) => {
-            if (probability(PROPABILITY.CAPITALISED)) {
+            if (probability(PROBABILITY.CAPITALISED)) {
                 words[index] = upperFirst(word);
             }
         });
@@ -19,7 +19,7 @@ const addCapitalisation = (enabled, words) => {
 const addNumbers = (enabled, words) => {
     if (enabled) {
         words.forEach((word, index) => {
-            if (index > 1 && !!isNaN(words[index - 1]) && probability(PROPABILITY.NUMBER)) {
+            if (!!isNaN(words[index - 1]) && probability(PROBABILITY.NUMBER)) {
                 words[index] = `${Math.floor(Math.random() * 999) + 100}`.substr(0, Math.floor(Math.random() * 3) + 1);
             }
         });

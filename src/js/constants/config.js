@@ -8,7 +8,7 @@ export const CHARS_IN_WORD = 5;
 export const NUMBER_OF_SLOW_KEYS = 10;
 export const NUMBER_OF_ERROR_KEYS = 10;
 
-export const PROPABILITY = {
+export const PROBABILITY = {
     CAPITALISED: 0.4,
     NUMBER: 0.3
 };
