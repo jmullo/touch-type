@@ -18,7 +18,7 @@ export const PROBABILITY = {
 
 export const OPTIONS_DEFAULT = {
     language: load('language', 'english'),
-    words: load('words', '20'),
+    words: load('words', '10'),
     capitalisation: load('capitalisation', false),
     punctuation: load('punctuation', false),
     numbers: load('numbers', false)
