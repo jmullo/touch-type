@@ -5,10 +5,13 @@ export const ROW_HEIGHT_PX = 37;
 export const MAX_WORD_LENGTH = 14;
 export const CHAR_WIDTH_PX = 16.81;
 export const CHARS_IN_WORD = 5;
-export const NUMBER_OF_SLOW_KEYS = 10;
-export const NUMBER_OF_ERROR_KEYS = 10;
+export const WORDS_SAMPLE_SIZE = 20;
+export const NUMBER_OF_SLOW_KEYS = 8;
+export const NUMBER_OF_ERROR_KEYS = 8;
 
 export const PROBABILITY = {
+    ADAPTIVE: 0.5,
+    ADAPTIVE_CAPITALISED: 0.7,
     CAPITALISED: 0.4,
     NUMBER: 0.3
 };

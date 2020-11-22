@@ -49,13 +49,12 @@ export const Header = () => {
                 { createOptionButton('language', 'finnish') }
             </div>
             <div className="options">
-                { createOptionButton('words', '20') }
+                { createOptionButton('words', '10') }
                 { createOptionButton('words', '50') }
                 { createOptionButton('words', '100') }
             </div>
             <div className="options">
                 { createToggleButton('capitalisation') }
-                { createToggleButton('punctuation') }
                 { createToggleButton('numbers') }
             </div>
         </div>

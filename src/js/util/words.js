@@ -1,45 +1,70 @@
-import { sample, cloneDeep, findIndex, upperFirst } from 'lodash';
+import { sample, sampleSize, cloneDeep, findIndex, upperFirst, union } from 'lodash';
 
-import { PROBABILITY, NUMBER_OF_ROWS, MAX_WORD_LENGTH, CHAR_WIDTH_PX } from 'constants/config';
+import {
+    PROBABILITY,
+    NUMBER_OF_ROWS,
+    MAX_WORD_LENGTH,
+    CHAR_WIDTH_PX,
+    WORDS_SAMPLE_SIZE
+} from 'constants/config';
 
-const probability = (number) => Math.random() <= number;
+const withProbability = (number) => Math.random() <= number;
 
-const addCapitalisation = (enabled, words) => {
-    if (enabled) {
-        words.forEach((word, index) => {
-            if (probability(PROBABILITY.CAPITALISED)) {
-                words[index] = upperFirst(word);
-            }
-        });
-    } else {
-        words = words.join(' ').toLowerCase().split(' ');
-    }
+const createNumber = () => `${Math.floor(Math.random() * 999) + 100}`.substr(0, Math.floor(Math.random() * 3) + 1);
+
+const nextNumber = (enabled) => enabled && withProbability(PROBABILITY.NUMBER);
+
+const capitalise = (enabled, word, probability) => enabled && withProbability(probability) ? upperFirst(word) : word.toLowerCase();
+
+const upperFirstInWorst = (word, worstKeys) => worstKeys.includes(word.substr(0, 1).toUpperCase());
+
+const calculateRank = (word, worstKeys, capitalisation) => {
+    const rank = worstKeys.reduce((sum, char) => word.includes(char.toLowerCase()) ? sum + 1 : sum, 0);
+
+    return capitalisation && upperFirstInWorst(word, worstKeys) ? rank + 1 : rank;
 };
 
-const addNumbers = (enabled, words) => {
-    if (enabled) {
-        words.forEach((word, index) => {
-            if (!!isNaN(words[index - 1]) && probability(PROBABILITY.NUMBER)) {
-                words[index] = `${Math.floor(Math.random() * 999) + 100}`.substr(0, Math.floor(Math.random() * 3) + 1);
-            }
-        });
-    }
+const adaptiveSample = (list, worstKeys, options) => {
+    const samples = sampleSize(list, WORDS_SAMPLE_SIZE);
+
+    samples.sort((wordA, wordB) =>
+        calculateRank(wordB, worstKeys, options.capitalisation) - calculateRank(wordA, worstKeys, options.capitalisation));
+
+    return samples[0];
 };
 
-export const selectWords = ({ options, list }) => {
-    let selectedWords = [];
+const selectWord = (list, options, worstKeys) => {
     let word;
 
-    while (selectedWords.length < options.words) {
-        word = sample(list[options.language]);
-
-        if (word.length <= MAX_WORD_LENGTH) {
-            selectedWords.push(word);
+    do {
+        if (withProbability(PROBABILITY.ADAPTIVE) && worstKeys.length) {
+            word = adaptiveSample(list[options.language], worstKeys, options);
+        } else {
+            word = sample(list[options.language]);
         }
+    } while (word.length > MAX_WORD_LENGTH);
+
+    if (upperFirstInWorst(word, worstKeys)) {
+        word = capitalise(options.capitalisation, word, PROBABILITY.ADAPTIVE_CAPITALISED);
+    } else {
+        word = capitalise(options.capitalisation, word, PROBABILITY.CAPITALISED);
     }
 
-    addCapitalisation(options.capitalisation, selectedWords);
-    addNumbers(options.numbers, selectedWords);
+    return word;
+};
+
+export const selectWords = (list, options, history) => {
+    const worstKeys = union(history.errorKeys || [], history.slowestKeys || []);
+
+    let selectedWords = [];
+
+    while (selectedWords.length < options.words) {
+        if (nextNumber(options.numbers)) {
+            selectedWords.push(createNumber());
+        } else {
+            selectedWords.push(selectWord(list, options, worstKeys));
+        }
+    }
 
     return selectedWords;
 };

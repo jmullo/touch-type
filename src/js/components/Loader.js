@@ -9,20 +9,20 @@ let loadedWords;
 
 export const Loader = () => {
 
-    const { state, options, allWords, setState, setAllWords, setTestWords } = useContext(Context);
+    const { state, options, allWords, history, setState, setAllWords, setTestWords } = useContext(Context);
 
     useEffect(async () => {
         if (!allWords.english) {
             loadedWords = await loadWordList();
 
             setAllWords(loadedWords);
-            setTestWords(selectWords({ options, list: loadedWords }));
+            setTestWords(selectWords(loadedWords, options, history));
         } else if (state === STATE.RESET) {
-            setTestWords(selectWords({ options, list: loadedWords }));
+
+            setTestWords(selectWords(loadedWords, options, history));
             setState(STATE.BEGIN);
         }
     });
 
     return null;
-
 };
