@@ -3,14 +3,19 @@ import { useContext } from 'react';
 import { Context } from 'components/Context';
 import { Text } from 'components/Text';
 import { Results } from 'components/Results';
-import { STATE } from 'constants/config';
+import { measureFont, getBoxPadding, getRowPadding } from 'util/dom';
+import { STATE, NUMBER_OF_ROWS } from 'constants/config';
 
 export const Middle = () => {
 
     const { state } = useContext(Context);
 
+    const style = {
+        minHeight: `${(getBoxPadding() * 2) + ((NUMBER_OF_ROWS - 1) * getRowPadding()) + (NUMBER_OF_ROWS * measureFont().height)}px`
+    };
+
     return (
-        <div className="middle">
+        <div id="middle" className="middle" style={style}>
             <div className="box">
                 { state !== STATE.END && <Text /> }
                 { <Results /> }

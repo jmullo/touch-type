@@ -2,7 +2,9 @@
     --font-main: 'Roboto', sans-serif;
     --font-input: 'Roboto Mono', monospace;
 
-    --main-width: 796px;
+    --main-width: 800px;
+    --box-padding: 10px;
+    --row-padding: 4px;
 
     --font-large: 28px;
     --font-small: 20px;
