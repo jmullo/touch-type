@@ -32,15 +32,8 @@ export const Status = () => {
         }
     };
 
-    let className;
-
-    if (state === STATE.BEGIN ) {
-        className = 'hint visible';
-    } else if (state === STATE.END) {
-        className = 'hint visible clickable';
-    } else {
-        className = 'hint hidden';
-    }
+    const classNameStart = state === STATE.BEGIN ? "hint visible" : "hint hidden";
+    const classNamePrompt = state === STATE.END ? "hint visible" : "hint hidden";
 
     return (
         <div className="status">
@@ -54,22 +47,18 @@ export const Status = () => {
                     ref={inputRef}
                     onKeyUp={handleKeyUp} />
             }
-            <div className={className}>
-                {
-                    state === STATE.END &&
-                    <>
-                        <div className="entry" onClick={handleContinue}>
-                            Press <span className="key">Enter</span> to continue,
-                        </div>
-                        <div className="entry" onClick={handleReset}>
-                            <span className="key">Delete</span> to reset statistics
-                        </div>
-                    </>
-                }
-                {
-                    state !== STATE.END &&
-                    <>Start typing</>
-                }
+            <div className={classNameStart}>
+                <div className="entry">
+                    Start typing
+                </div>
+            </div>
+            <div className={classNamePrompt}>
+                <div className="entry clickable" onClick={handleContinue}>
+                    Press <span className="key">Enter</span> to continue,
+                </div>
+                <div className="entry clickable" onClick={handleReset}>
+                    <span className="key">Delete</span> to reset statistics
+                </div>
             </div>
         </div>
     );

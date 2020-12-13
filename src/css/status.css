@@ -1,4 +1,5 @@
 .hint {
+    position: absolute;
     color: var(--hint);
     font-size: var(--font-status);
 }
@@ -6,22 +7,22 @@
 .hint.visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.4s, visibility 0.4s;
+    transition: opacity 0.3s, visibility 0.3s;
 }
 
 .hint.hidden {
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.4s, visibility 0.4s;
-}
-
-.clickable {
-    cursor: pointer;
+    transition: opacity 0.3s, visibility 0.3s;
 }
 
 .entry {
     margin: 0 4px 0 4px;
     float: left;
+}
+
+.clickable {
+    cursor: pointer;
 }
 
 .key {
