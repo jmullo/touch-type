@@ -57,6 +57,18 @@ export const calculateSpeed = (textLength, timeMinutes) =>
 export const calculateAccuracy = (textLength, errors) =>
     Math.floor(Math.max(0, textLength - countErrors(errors)) / textLength * 100);
 
+export const resetHistory = (results) => ({
+    tests: 0,
+    textLength: 0,
+    timeMinutes: 0,
+    keyTimes: [],
+    errors: [],
+    averageWordsPerMinute: results.wordsPerMinute,
+    averageAccuracy: results.accuracy,
+    slowestKeys: [],
+    errorKeys: []
+});
+
 export const mergeToHistory = (currentHistory, textLength, timeMinutes, keyTimes, errors) => {
     const history = {
         tests: (currentHistory.tests || 0) + 1,

@@ -1,25 +1,34 @@
 import { useContext, useCallback } from 'react';
 
 import { Context } from 'components/Context';
+import { resetHistory } from 'util/results';
 import { STATE } from 'constants/config';
 import { focusHandler } from 'util/dom';
 
 export const Status = () => {
 
-    const { state, setState } = useContext(Context);
+    const { state, results, setState, setHistory } = useContext(Context);
     const inputRef = useCallback(focusHandler, []);
 
-    const handleKeypress = (event) => {
+    const handleKeyUp = (event) => {
         event.preventDefault();
 
         if (state === STATE.END && event.key === 'Enter') {
             setState(STATE.RESET);
+        } else if (state === STATE.END && event.key === 'Delete') {
+            setHistory(resetHistory(results));
         }
     };
 
-    const handleClick = () => {
+    const handleContinue = () => {
         if (state === STATE.END) {
             setState(STATE.RESET);
+        }
+    };
+
+    const handleReset = () => {
+        if (state === STATE.END) {
+            setHistory(resetHistory(results));
         }
     };
 
@@ -43,12 +52,19 @@ export const Status = () => {
                     tabIndex="0"
                     autoComplete="off"
                     ref={inputRef}
-                    onKeyPress={handleKeypress} />
+                    onKeyUp={handleKeyUp} />
             }
-            <div className={className} onClick={handleClick}>
+            <div className={className}>
                 {
                     state === STATE.END &&
-                    <>Press <span className="key">Enter</span> to continue</>
+                    <>
+                        <div className="entry" onClick={handleContinue}>
+                            Press <span className="key">Enter</span> to continue,
+                        </div>
+                        <div className="entry" onClick={handleReset}>
+                            <span className="key">Delete</span> to reset statistics
+                        </div>
+                    </>
                 }
                 {
                     state !== STATE.END &&
