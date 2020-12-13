@@ -13,7 +13,7 @@ const withProbability = (number) => Math.random() <= number;
 
 const createNumber = () => `${Math.floor(Math.random() * 999) + 100}`.substr(0, Math.floor(Math.random() * 3) + 1);
 
-const nextNumber = (enabled) => enabled && withProbability(PROBABILITY.NUMBER);
+const nextIsNumber = (enabled) => enabled && withProbability(PROBABILITY.NUMBER);
 
 const capitalise = (enabled, word, probability) => enabled && withProbability(probability) ? upperFirst(word) : word.toLowerCase();
 
@@ -43,7 +43,7 @@ const selectWord = (list, options, worstKeys) => {
         } else {
             word = sample(list[options.language]);
         }
-    } while (word.length > MAX_WORD_LENGTH);
+    } while (word.length > MAX_WORD_LENGTH || word.includes('-'));
 
     if (upperFirstInWorst(word, worstKeys)) {
         word = capitalise(options.capitalisation, word, PROBABILITY.ADAPTIVE_CAPITALISED);
@@ -60,7 +60,7 @@ export const selectWords = (list, options, history) => {
     let selectedWords = [];
 
     while (selectedWords.length < options.words) {
-        if (nextNumber(options.numbers)) {
+        if (nextIsNumber(options.numbers)) {
             selectedWords.push(createNumber());
         } else {
             selectedWords.push(selectWord(list, options, worstKeys));
