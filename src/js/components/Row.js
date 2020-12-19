@@ -1,5 +1,5 @@
 import { Char } from 'components/Char';
-import { measureFont, getRowPadding } from 'util/dom';
+import { getMeasuredFont, getRowPadding } from 'util/dom';
 import { NUMBER_OF_ROWS } from 'constants/config';
 
 export const Row = ({ index, row, hidden, activeRowIndex, typedText, caretIndex }) => {
@@ -8,7 +8,7 @@ export const Row = ({ index, row, hidden, activeRowIndex, typedText, caretIndex 
                   (index >= NUMBER_OF_ROWS && (index - activeRowIndex) > 3);
 
     const className = (hidden || hide) ? "row hidden" : "row visible";
-    const style = { top: `${(row.number * getRowPadding()) + (row.number * measureFont().height)}px` };
+    const style = { top: `${(row.number * getRowPadding()) + (row.number * getMeasuredFont().height)}px` };
 
     let charIndex = row.charIndex;
 

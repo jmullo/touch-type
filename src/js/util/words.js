@@ -1,6 +1,6 @@
 import { sample, sampleSize, cloneDeep, findIndex, upperFirst, union } from 'lodash';
 
-import { getMaxTextWidth, measureFont } from 'util/dom';
+import { getMaxTextWidth, getMeasuredFont } from 'util/dom';
 import { PROBABILITY, NUMBER_OF_ROWS, MAX_WORD_LENGTH, MAX_WORDS_PER_MINUTE, WORDS_SAMPLE_SIZE } from 'constants/config';
 
 const withProbability = (number) => Math.random() <= number;
@@ -70,7 +70,7 @@ export const getActiveRowIndex = (rows, caretIndex) =>
 
 const createRow = (words) => {
     const maxWidth = getMaxTextWidth();
-    const charWidth = measureFont().width;
+    const charWidth = getMeasuredFont().width;
     const array = [];
 
     while (words.length && (array.join(' ').length + words[0].length + 2) * charWidth < maxWidth) {

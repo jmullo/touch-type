@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Context } from 'components/Context';
 import { Text } from 'components/Text';
 import { Results } from 'components/Results';
-import { measureFont, getBoxPadding, getRowPadding } from 'util/dom';
+import { getMeasuredFont, getBoxPadding, getRowPadding } from 'util/dom';
 import { STATE, NUMBER_OF_ROWS } from 'constants/config';
 
 export const Middle = () => {
@@ -11,7 +11,7 @@ export const Middle = () => {
     const { state } = useContext(Context);
 
     const style = {
-        minHeight: `${(getBoxPadding() * 2) + ((NUMBER_OF_ROWS - 1) * getRowPadding()) + (NUMBER_OF_ROWS * measureFont().height)}px`
+        minHeight: `${(getBoxPadding() * 2) + ((NUMBER_OF_ROWS - 1) * getRowPadding()) + (NUMBER_OF_ROWS * getMeasuredFont().height)}px`
     };
 
     return (

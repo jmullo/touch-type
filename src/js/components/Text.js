@@ -2,7 +2,7 @@ import { useContext, useState, useCallback, useEffect, useRef } from 'react';
 
 import { Context } from 'components/Context';
 import { Row } from 'components/Row';
-import { STATE } from 'constants/config';
+import { STATE, NUMBER_OF_ROWS } from 'constants/config';
 import { focusHandler } from 'util/dom';
 import { addError, addKeyTime } from 'util/results';
 import { rowGenerator, getActiveRowIndex } from 'util/words';
@@ -90,16 +90,24 @@ export const Text = () => {
                 onChange={handleInput}
                 onKeyPress={handleKeypress} />
             {
-                rows.map((row, index) => (
-                    <Row
-                        index={index}
-                        row={row}
-                        hidden={state === STATE.END}
-                        typedText={typedText}
-                        activeRowIndex={getActiveRowIndex(rows, typedText.length)}
-                        caretIndex={typedText.length}
-                        key={index} />
-                ))
+                rows.map((row, index) => {
+                    const activeRowIndex = getActiveRowIndex(rows, typedText.length);
+
+                    if (Math.abs(index - activeRowIndex) <= NUMBER_OF_ROWS) {
+                        return (
+                            <Row
+                                index={index}
+                                row={row}
+                                hidden={state === STATE.END}
+                                typedText={typedText}
+                                activeRowIndex={activeRowIndex}
+                                caretIndex={typedText.length}
+                                key={index} />
+                        );
+                    }
+
+                    return null;
+                })
             }
         </div>
     );

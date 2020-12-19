@@ -1,19 +1,19 @@
-export const getMaxTextWidth = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--main-width'), 10);
+import { memoize } from 'lodash';
 
-export const getBoxPadding = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--box-padding'), 10);
+let measuredFont;
 
-export const getRowPadding = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--row-padding'), 10);
-
-export const measureFont = () => {
+const measureFont = () => {
     const element = document.getElementById('measure');
 
     if (element) {
         const rect = element.getBoundingClientRect();
 
-        return {
+        measuredFont = {
             width: rect.width,
             height: rect.height
         };
+
+        return measuredFont;
     }
 
     return {
@@ -21,6 +21,14 @@ export const measureFont = () => {
         height: 1
     };
 };
+
+export const getMeasuredFont = () => measuredFont ? measuredFont : measureFont();
+
+export const getMaxTextWidth = memoize(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--main-width'), 10));
+
+export const getBoxPadding = memoize(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--box-padding'), 10));
+
+export const getRowPadding = memoize(() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--row-padding'), 10));
 
 export const focusHandler = (element) => {
     if (element) {
