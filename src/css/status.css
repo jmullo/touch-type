@@ -7,7 +7,7 @@
 .hint.visible {
     visibility: visible;
     opacity: 1;
-    transition: opacity 0.3s, visibility 0.3s;
+    transition: opacity 0.3s linear 0.1s, visibility 0.3s linear 0.1s;
 }
 
 .hint.hidden {

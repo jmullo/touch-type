@@ -1,13 +1,7 @@
 import { sample, sampleSize, cloneDeep, findIndex, upperFirst, union } from 'lodash';
 
 import { getMaxTextWidth, measureFont } from 'util/dom';
-
-import {
-    PROBABILITY,
-    NUMBER_OF_ROWS,
-    MAX_WORD_LENGTH,
-    WORDS_SAMPLE_SIZE
-} from 'constants/config';
+import { PROBABILITY, NUMBER_OF_ROWS, MAX_WORD_LENGTH, MAX_WORDS_PER_MINUTE, WORDS_SAMPLE_SIZE } from 'constants/config';
 
 const withProbability = (number) => Math.random() <= number;
 
@@ -56,10 +50,11 @@ const selectWord = (list, options, worstKeys) => {
 
 export const selectWords = (list, options, history) => {
     const worstKeys = union(history.errorKeys || [], history.slowestKeys || []);
+    const wordAmount = options.time / 60 * MAX_WORDS_PER_MINUTE;
 
     let selectedWords = [];
 
-    while (selectedWords.length < options.words) {
+    while (selectedWords.length < wordAmount) {
         if (nextIsNumber(options.numbers)) {
             selectedWords.push(createNumber());
         } else {

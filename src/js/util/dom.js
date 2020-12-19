@@ -6,11 +6,19 @@ export const getRowPadding = () => parseFloat(getComputedStyle(document.document
 
 export const measureFont = () => {
     const element = document.getElementById('measure');
-    const rect = element.getBoundingClientRect();
+
+    if (element) {
+        const rect = element.getBoundingClientRect();
+
+        return {
+            width: rect.width,
+            height: rect.height
+        };
+    }
 
     return {
-        width: rect.width,
-        height: rect.height
+        width: 1,
+        height: 1
     };
 };
 

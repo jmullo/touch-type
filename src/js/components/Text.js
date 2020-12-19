@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback, useEffect } from 'react';
+import { useContext, useState, useCallback, useEffect, useRef } from 'react';
 
 import { Context } from 'components/Context';
 import { Row } from 'components/Row';
@@ -7,36 +7,39 @@ import { focusHandler } from 'util/dom';
 import { addError, addKeyTime } from 'util/results';
 import { rowGenerator, getActiveRowIndex } from 'util/words';
 
+let testText;
 let lastKeyTime;
 
 const setLastKeyTime = (time) => lastKeyTime = time;
 
 export const Text = () => {
 
-    const { state, testWords, setState, setKeyTimes, setErrors } = useContext(Context);
-    const [ typedText, setTypedText ] = useState([]);
+    const { state, testWords, typedText, setState, setTypedText, setKeyTimes, setErrors } = useContext(Context);
+    const [ rows, setRows ] = useState([]);
     const inputRef = useCallback(focusHandler, []);
-
-    const testText = testWords.join(' ');
-    const rows = Array.from(rowGenerator(testWords));
+    const testWordsRef = useRef();
 
     let typedChar;
     let caretIndex;
     let timeNow;
 
     useEffect(() => {
-        if (state === STATE.RESET) {
+        if (state === STATE.BEGIN && testWordsRef.current !== testWords) {
+            testWordsRef.current = testWords;
+            testText = testWords.join(' ');
+
+            setRows(Array.from(rowGenerator(testWords)));
+        } else if (state === STATE.RESET) {
+            testText = null;
+
+            setRows([]);
             setTypedText([]);
             setLastKeyTime(null);
         }
-    });
+
+    }, [state]);
 
     const handleInput = (event) => {
-        if (state === STATE.END) {
-            event.preventDefault();
-            return;
-        }
-
         if (event.nativeEvent.inputType === 'deleteContentBackward') {
             setTypedText(typedText.slice(0, -1));
             setLastKeyTime(null);
@@ -48,11 +51,6 @@ export const Text = () => {
     };
 
     const handleKeypress = (event) => {
-        if (state === STATE.END) {
-            event.preventDefault();
-            return;
-        }
-
         timeNow = performance.now();
 
         if (state !== STATE.TESTING) {
@@ -79,10 +77,6 @@ export const Text = () => {
         }
 
         setTypedText((chars) => [...chars, typedChar]);
-
-        if (caretIndex + 1 === testText.length) {
-            setState(STATE.END);
-        }
     };
 
     return (

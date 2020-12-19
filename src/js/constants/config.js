@@ -3,6 +3,7 @@ import { load } from 'api/storage';
 export const NUMBER_OF_ROWS = 5;
 export const MAX_WORD_LENGTH = 14;
 export const CHARS_IN_WORD = 5;
+export const MAX_WORDS_PER_MINUTE = 400;
 export const WORDS_SAMPLE_SIZE = 20;
 export const NUMBER_OF_SLOW_KEYS = 8;
 export const NUMBER_OF_ERROR_KEYS = 8;
@@ -17,12 +18,14 @@ export const PROBABILITY = {
 export const OPTIONS_DEFAULT = {
     language: load('language', 'english'),
     words: load('words', '10'),
+    time: load('time', '60'),
     capitalisation: load('capitalisation', false),
     punctuation: load('punctuation', false),
     numbers: load('numbers', false)
 };
 
 export const STATE = {
+    LOADING: 'LOADING',
     BEGIN: 'BEGIN',
     TESTING: 'TESTING',
     END: 'END',

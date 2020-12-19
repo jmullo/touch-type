@@ -6,14 +6,14 @@ import { STATE } from 'constants/config';
 
 export const Results = () => {
 
-    const { state, keyTimes, errors, history, results, testWords, setErrors, setKeyTimes, setResults, setHistory } = useContext(Context);
+    const { state, keyTimes, errors, history, results, typedText, setErrors, setKeyTimes, setResults, setHistory } = useContext(Context);
     const [ startTime, setStartTime ] = useState(null);
 
     useEffect(() => {
-        if (!startTime && state === STATE.TESTING) {
+        if (state === STATE.TESTING) {
             setStartTime(performance.now());
-        } else if (startTime && state === STATE.END) {
-            const textLength = testWords.join(' ').length;
+        } else if (state === STATE.END) {
+            const textLength = typedText.length;
             const timeMinutes = (performance.now() - startTime) / 60000;
             const wordsPerMinute = calculateSpeed(textLength, timeMinutes);
             const accuracy = calculateAccuracy(textLength, errors);
@@ -28,7 +28,7 @@ export const Results = () => {
             setResults({});
             setStartTime(null);
         }
-    });
+    }, [state]);
 
     const className = state === STATE.END ? 'results' : 'results hidden';
 

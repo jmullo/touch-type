@@ -1,13 +1,14 @@
 import { useContext, useCallback } from 'react';
 
 import { Context } from 'components/Context';
+import { Timer } from 'components/Timer';
 import { resetHistory } from 'util/results';
 import { STATE } from 'constants/config';
 import { focusHandler } from 'util/dom';
 
 export const Status = () => {
 
-    const { state, results, setState, setHistory } = useContext(Context);
+    const { state, options, results, setState, setHistory } = useContext(Context);
     const inputRef = useCallback(focusHandler, []);
 
     const handleKeyUp = (event) => {
@@ -17,6 +18,12 @@ export const Status = () => {
             setState(STATE.RESET);
         } else if (state === STATE.END && event.key === 'Delete') {
             setHistory(resetHistory(results));
+        }
+    };
+
+    const handleTimerComplete = () => {
+        if (state === STATE.TESTING) {
+            setState(STATE.END);
         }
     };
 
@@ -33,6 +40,7 @@ export const Status = () => {
     };
 
     const classNameStart = state === STATE.BEGIN ? "hint visible" : "hint hidden";
+    const classNameTesting = state === STATE.TESTING ? "hint visible" : "hint hidden";
     const classNamePrompt = state === STATE.END ? "hint visible" : "hint hidden";
 
     return (
@@ -50,6 +58,14 @@ export const Status = () => {
             <div className={classNameStart}>
                 <div className="entry">
                     Start typing
+                </div>
+            </div>
+            <div className={classNameTesting}>
+                <div className="entry">
+                    {
+                        state === STATE.TESTING &&
+                        <Timer time={options.time} onComplete={handleTimerComplete} />
+                    }
                 </div>
             </div>
             <div className={classNamePrompt}>

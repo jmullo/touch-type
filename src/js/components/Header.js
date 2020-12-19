@@ -23,10 +23,10 @@ export const Header = () => {
         setAndResetState({...options, [key]: !options[key] });
     };
 
-    const createOptionButton = (key, value) => (
+    const createOptionButton = (key, value, text) => (
         <Button
             className="button"
-            text={value}
+            text={text || value}
             enabled={options[key] === value}
             onClick={() => handleOption(key, value)} />
     );
@@ -49,9 +49,8 @@ export const Header = () => {
                 { createOptionButton('language', 'finnish') }
             </div>
             <div className="options">
-                { createOptionButton('words', '10') }
-                { createOptionButton('words', '50') }
-                { createOptionButton('words', '100') }
+                { createOptionButton('time', '60', '1 min') }
+                { createOptionButton('time', '300', '5 min') }
             </div>
             <div className="options">
                 { createToggleButton('capitalisation') }
